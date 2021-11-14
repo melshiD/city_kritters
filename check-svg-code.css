@@ -1,8 +1,11 @@
-.container{
-    width: 300px;
-    height: 300px;
+.kritter-card{
+    width: 395px;
+    height: 580px;
+    padding-left: 20px;
+    padding-top: 20px;
     text-align: center;
-    margin-left: 200px;
+    margin-left: 20px;
+    border: dotted red;
 }
 <defs>
 <style>
