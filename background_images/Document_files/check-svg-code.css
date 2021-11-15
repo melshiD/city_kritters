@@ -1,0 +1,88 @@
+.kritter-card{
+    width: 395px;
+    height: 580px;
+    padding-left: 20px;
+    padding-top: 20px;
+    text-align: center;
+    margin-left: 20px;
+    border: dotted red;
+}
+<defs>
+<style>
+  .cls-1 {
+    fill: #d9efee;
+  }
+
+  .cls-1,
+  .cls-10,
+  .cls-11,
+  .cls-2,
+  .cls-3,
+  .cls-4,
+  .cls-5,
+  .cls-6,
+  .cls-7,
+  .cls-8,
+  .cls-9 {
+    stroke: #231f20;
+    stroke-miterlimit: 10;
+  }
+
+  .cls-1,
+  .cls-11,
+  .cls-6,
+  .cls-7,
+  .cls-8 {
+    stroke-width: 3px;
+  }
+
+  .cls-2 {
+    fill: #009444;
+  }
+
+  .cls-2,
+  .cls-3,
+  .cls-4 {
+    stroke-width: 3px;
+  }
+
+  .cls-3 {
+    fill: #00a14b;
+  }
+
+  .cls-4 {
+    fill: #9acd6f;
+  }
+
+  .cls-5 {
+    fill: #fff;
+  }
+
+  .cls-10,
+  .cls-5,
+  .cls-9 {
+    stroke-width: 3px;
+  }
+
+  .cls-6 {
+    fill: #fffde9;
+  }
+
+  .cls-7 {
+    fill: #4bc5d9;
+  }
+
+  .cls-10,
+  .cls-8 {
+    fill: #415777;
+  }
+
+  .cls-9 {
+    fill: #799ed2;
+  }
+
+  .cls-11 {
+    fill: #00948f;
+  }
+</style>
+</defs>
