@@ -1,0 +1,25 @@
+.root{
+    /*weak way of doing this, but just to get moving and not
+    caught up in how to structure my color sets*/
+    --color1: #d9efee;
+    --color2: #231f20;
+    --color3: #009444;
+    --color5: #00a14b;
+    --color6: #9acd6f;
+    --color7: #fff;
+    --color8: #fffde9;
+    --color9: #4bc5d9;
+    --color10: #415777;
+    --color11: #799ed2;
+    --color12: #00948f;
+}
+.easter{
+    --easter1: #1E280F;
+    --easter1: #37D485;
+    --easter1: #49A2EB;
+    --easter1: #7237D4;
+    --easter1: #F56CA2;
+
+    --neon: #39FF15;
+    --red-neon: rgb(255, 7, 58);
+}

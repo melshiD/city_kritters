@@ -1,3 +1,26 @@
+//Color swatch array generation:
+const componentToHex =function (c){
+    var hex = c.toString(16);
+    return hex.length == 1 ? '0' + hex : hex;
+}
+
+function rgtToHex(r, g, b){
+    return `#${componentToHex(r)}${componentToHex(g)}${componentToHex(b)}`;
+}
+
+const hashFunc = function(){
+    var hash = 0;
+    if (this.length === 0) return hash;
+    for(i=0;i<this.length;i++){
+        char = this.charCodeAt(i);
+        hash = ((hash<<5)-hash)+char;
+        hash = hash & hash;
+    }
+    return hash;
+}
+
+
+
 //begin control of head/stroke slider (called Slider 1);
 const headColorSlider = document.getElementById('head_color_slider');
 
@@ -18,7 +41,7 @@ const updateHeadCode = () => {
 
 headColorSlider.addEventListener("change", function() {
     changeStrokeColor('red');
-    changeHeadColor('orangered');
+    changeHeadColor('pink');
     updateHeadCode();
 }, false);
 //End of Slider 1 functionality
@@ -26,3 +49,4 @@ headColorSlider.addEventListener("change", function() {
 
 
 
+//Slider 2, body

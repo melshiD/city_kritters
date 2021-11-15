@@ -53,16 +53,19 @@
              transform="translate(-126.02 -178.76)" />
          </g>
          <g id="g_mouth">
-           <path class="mouth"
-             d="M284.36,326.52s-3.29,15.43-19.62,19.85S195.29,345,178,334.76L160.75,324.5h0l-2.2,13.59-1.48,4a18.74,18.74,0,0,1,7.74,5.52c2.86,3.8,1.81,4.72,1.81,4.72s20.7,9.45,20.68,12.49l0,3s21.08,3.13,22.87,7,1.26,4.05,1.26,4.05,17.15-1.45,19.59,3.1,3.11,3.71,3.11,3.71,22.8,4.35,25.3,1.07a5.68,5.68,0,0,0,.85-5.55s8.44,11.94,18.42,2.06S289.82,374,289.82,374s9.67-9.22,9.83-13.41,2.76-5,2.76-5,3.13-8.67,2.77-10.47,1.82-3.4.85-6.91-4.5-11.9-12.21-11.91A86.67,86.67,0,0,0,284.36,326.52Z"
-             transform="translate(-126.02 -178.76)" />
-           <line class="cls-5" x1="49.68" y1="154.62" x2="48.03" y2="177.12" />
-           <line class="cls-5" x1="73.78" y1="163.53" x2="71.65" y2="191.02" />
-           <line class="cls-5" x1="102.34" y1="168.03" x2="103.37" y2="201.76" />
-           <line class="cls-5" x1="127.91" y1="168.99" x2="134.22" y2="202.45" />
-           <line class="cls-5" x1="147.7" y1="163.34" x2="163.79" y2="195.19" />
-           <line class="cls-5" x1="156.03" y1="153.64" x2="174.78" y2="178.07" />
-           <line class="cls-5" x1="159.53" y1="148.31" x2="179.16" y2="166.33" />
+           <path class="mouth-volume"
+            d="M284.36,326.52s-3.29,15.43-19.62,19.85S195.29,345,178,334.76L160.75,324.5h0l-2.2,13.59-1.48,4a18.74,18.74,0,0,1,7.74,5.52c2.86,3.8,1.81,4.72,1.81,4.72s20.7,9.45,20.68,12.49l0,3s21.08,3.13,22.87,7,1.26,4.05,1.26,4.05,17.15-1.45,19.59,3.1,3.11,3.71,3.11,3.71,22.8,4.35,25.3,1.07a5.68,5.68,0,0,0,.85-5.55s8.44,11.94,18.42,2.06S289.82,374,289.82,374s9.67-9.22,9.83-13.41,2.76-5,2.76-5,3.13-8.67,2.77-10.47,1.82-3.4.85-6.91-4.5-11.9-12.21-11.91A86.67,86.67,0,0,0,284.36,326.52Z"
+          transform="translate(-126.02 -178.76)" />
+          <line class="teeth-lines" stroke="#39FF14" x1="49.68" y1="154.62" x2="48.03" y2="177.12" />
+          <line class="teeth-lines" stroke="#39FF14" x1="73.78" y1="163.53" x2="71.65" y2="191.02" />
+          <line class="teeth-lines" stroke="#39FF14" x1="102.34" y1="168.03" x2="103.37" y2="201.76" />
+          <line class="teeth-lines" stroke="#39FF14" x1="127.91" y1="168.99" x2="134.22" y2="202.45" />
+          <line class="teeth-lines" stroke="#39FF14" x1="147.7" y1="163.34" x2="163.79" y2="195.19" />
+          <line class="teeth-lines" stroke="#39FF14" x1="156.03" y1="153.64" x2="174.78" y2="178.07" />
+          <line class="teeth-lines" stroke="#39FF14" x1="159.53" y1="148.31" x2="179.16" y2="166.33" />
+          <path class="mouth-overlay" fill="none" stroke="#39FF14"
+            d="M284.36,326.52s-3.29,15.43-19.62,19.85S195.29,345,178,334.76L160.75,324.5h0l-2.2,13.59-1.48,4a18.74,18.74,0,0,1,7.74,5.52c2.86,3.8,1.81,4.72,1.81,4.72s20.7,9.45,20.68,12.49l0,3s21.08,3.13,22.87,7,1.26,4.05,1.26,4.05,17.15-1.45,19.59,3.1,3.11,3.71,3.11,3.71,22.8,4.35,25.3,1.07a5.68,5.68,0,0,0,.85-5.55s8.44,11.94,18.42,2.06S289.82,374,289.82,374s9.67-9.22,9.83-13.41,2.76-5,2.76-5,3.13-8.67,2.77-10.47,1.82-3.4.85-6.91-4.5-11.9-12.21-11.91A86.67,86.67,0,0,0,284.36,326.52Z"
+          transform="translate(-126.02 -178.76)" />
          </g>
          <!--just be sure to access id's first, then querySelectAll that id's returned object-->
          <g id="g_eye_left">
@@ -123,23 +126,23 @@
       <svg width="300" height="500" viewBox="0 0 300 500">
         <use xlink:href="#whole_figure" id="whole_figure_uniqueId" />
       </svg>
-      <div class="form-group">
-        <label for="formControlRange"><b>Head and Stroke</b><span class="badge badge-dark ml-2" id="head_code"></span></label>
-        <input type="range" min="10" max="98" class="form-control-range" id="head_color_slider">
+    </div>
+    <div class="form-group">
+      <label for="formControlRange"><b>Head and Stroke</b><span class="badge badge-dark ml-2" id="head_code"></span></label>
+      <input type="range" min="10" max="98" class="form-control-range" id="head_color_slider">
     </div>
     <div class="form-group">
       <label for="formControlRange"><b>Body</b><span class="badge badge-dark ml-2" id="body_code"></span></label>
       <input type="range" min="10" max="98" class="form-control-range" id="body_color_slider">
-  </div>
-  <div class="form-group">
-    <label for="formControlRange"><b>Head and body</b><span class="badge badge-dark ml-2" id="headcode"></span></label>
-    <input type="range" min="10" max="98" class="form-control-range" id="body_color_slider">
-</div>
-<div class="form-group">
-  <label for="formControlRange"><b>Head and body</b><span class="badge badge-dark ml-2" id="headcode"></span></label>
-  <input type="range" min="10" max="98" class="form-control-range" id="body_color_slider">
-</div>
-
+    </div>
+    <div class="form-group">
+      <label for="formControlRange"><b>Eyes</b><span class="badge badge-dark ml-2" id="eyes_code"></span></label>
+      <input type="range" min="10" max="98" class="form-control-range" id="eyes_color_slider">
+    </div>
+    <div class="form-group">
+      <label for="formControlRange"><b>Limbs</b><span class="badge badge-dark ml-2" id="limbs_code"></span></label>
+      <input type="range" min="10" max="98" class="form-control-range" id="limbs_color_slider">
+    </div>
   </div>
   <script src='check-svg-code.js' rel='javascript'></script>
 </body>
