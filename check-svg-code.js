@@ -1,4 +1,3 @@
-//Color swatch array generation and useful hex manipulation functions:
 const submitButton = document.getElementById('button_submit');
 const userForm = document.getElementById('form_user_input');
 
@@ -6,6 +5,7 @@ submitButton.addEventListener('click', (event) => {
     event.preventDefault();
     //event.stopPropagation();
     manifestNewKritter();
+    
 });
 
 const componentToHex = function (c){
@@ -48,6 +48,9 @@ function hashToColorArray(inputHash){
 function manifestNewKritter(){
     let userInput = document.getElementById('text_user_input').value;
     let colorArray = hashToColorArray(sha256(userInput));
+
+    //makeColorSwatch(userInput);
+
     document.getElementById('g_head').style.stroke = colorArray[3];
     document.getElementById('g_mouth').style.stroke = colorArray[3];
     document.querySelector('[class="mouth-volume"]').style.fill = colorArray[7];
@@ -56,8 +59,7 @@ function manifestNewKritter(){
     document.querySelectorAll('[class*="arms-"]').forEach(
         (arm)=>{arm.style.fill = colorArray[7];}
     );
-
-
+ 
     let bellyColor = colorArray[4];
     document.getElementById('g_belly').style.fill = bellyColor;
     let justTrying = document.querySelectorAll('[class*="belly-"]');
@@ -75,11 +77,6 @@ function manifestNewKritter(){
     let bellyColorTwo = rgbToHex(colorShift);
     justTrying[2].style.fill = bellyColorTwo;
     let ColorTwo = rgbToHex(colorshift.r, shiftedG, colorshift.b);
-
-    //changeHeadFill(colorArray[0]);
-    //changeStrokeColor(colorArray[1]);
-    //changeBellyFill(colorArray[3]);
-    //return false;
 
 }
 
@@ -99,13 +96,11 @@ function makeColorSwatch(userInput){
 const changeHeadFill = (newHeadColorNumber) => {
     let kritterHead = document.getElementById('g_head');
     kritterHead.setAttribute('fill', newHeadColorNumber);
-    return false;
 }
 const changeStrokeColor = (newStrokeColorNumber) => {
     let allStrokes = document.getElementById('whole_figure_uniqueId');
     allStrokes.style.stroke = newStrokeColorNumber;
     allStrokes.style.strokeWidth = '5px';
-    return false;
 }
 
 //change body color
@@ -117,7 +112,6 @@ const changeBellyFill = (newBellyColorNumber) => {
     let ColorTwo = rgbToHex(colorshift.r, shiftedG, colorshift.b);
     bellyBulges[1].style.fill = `#${colorTwo}`;
     bellyBulges[2].style.fill = `#${colorTwo}`;
-    return false;
 }
 
 //sha256 implementation in JS (for me to generate raw color sets)
