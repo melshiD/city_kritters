@@ -1,6 +1,16 @@
 //Color swatch array generation and useful hex manipulation functions:
+const submitButton = document.getElementById('button_submit');
+const userForm = document.getElementById('form_user_input');
+
+submitButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    //event.stopPropagation();
+    manifestNewKritter();
+});
+
 const componentToHex = function (c){
-    var hex = c.toString(16);
+    console.log(typeof c);
+    let hex = c.toString(16);
     console.log(hex);
     return hex.length == 1 ? '0' + hex : hex;
 }
@@ -11,6 +21,7 @@ function rgbToHex(r, g, b){
 
 function hexToRgb(hex) {
     // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+    var hex = hex.includes('#')?hex=hex.slice(1, 7):hex;
     var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
     hex = hex.replace(shorthandRegex, function(m, r, g, b) {
       return r + r + g + g + b + b;
@@ -34,15 +45,41 @@ function hashToColorArray(inputHash){
     return colorArray;
 }
 
-//const colorArray = custInput => hashToColorArray(sha256(custInput));
-
-//const submitFormTarget = document.getElementById('form_user_input');
-//submitFormTarget.addEventListener('submit', manifestNewKritter);
-
 function manifestNewKritter(){
     let userInput = document.getElementById('text_user_input').value;
     let colorArray = hashToColorArray(sha256(userInput));
-    changeHeadFill(colorArray[0]);
+    document.getElementById('g_head').style.stroke = colorArray[3];
+    document.getElementById('g_mouth').style.stroke = colorArray[3];
+    document.querySelector('[class="mouth-volume"]').style.fill = colorArray[7];
+    document.getElementById('whole_figure_uniqueId').style.strokeWidth = '4px';
+    document.getElementById('g_head').style.fill = colorArray[0];
+    document.querySelectorAll('[class*="arms-"]').forEach(
+        (arm)=>{arm.style.fill = colorArray[7];}
+    );
+
+
+    let bellyColor = colorArray[4];
+    document.getElementById('g_belly').style.fill = bellyColor;
+    let justTrying = document.querySelectorAll('[class*="belly-"]');
+    console.log(justTrying);
+    justTrying[0].style.fill = colorArray[5];
+
+    let colorShift = hexToRgb(colorArray[5]);
+    if(colorShift.g>155){
+        colorShift.g -= 7;
+    }
+    else{
+        colorShift.g += 12;
+    }
+
+    let bellyColorTwo = rgbToHex(colorShift);
+    justTrying[2].style.fill = bellyColorTwo;
+    let ColorTwo = rgbToHex(colorshift.r, shiftedG, colorshift.b);
+
+    //changeHeadFill(colorArray[0]);
+    //changeStrokeColor(colorArray[1]);
+    //changeBellyFill(colorArray[3]);
+    //return false;
 
 }
 
@@ -62,11 +99,13 @@ function makeColorSwatch(userInput){
 const changeHeadFill = (newHeadColorNumber) => {
     let kritterHead = document.getElementById('g_head');
     kritterHead.setAttribute('fill', newHeadColorNumber);
+    return false;
 }
 const changeStrokeColor = (newStrokeColorNumber) => {
     let allStrokes = document.getElementById('whole_figure_uniqueId');
-    allStrokes.setAttribute('stroke', newStrokeColorNumber);
-    allStrokes.setAttribute('stroke-width', '5px');
+    allStrokes.style.stroke = newStrokeColorNumber;
+    allStrokes.style.strokeWidth = '5px';
+    return false;
 }
 
 //change body color
@@ -74,44 +113,14 @@ const changeBellyFill = (newBellyColorNumber) => {
     let bellyBulges = document.getElementById('g_belly').querySelectorAll('[class*="belly-"]');
     bellyBulges[0].style.fill = newBellyColorNumber;
     let colorShift = hexToRgb(newBellyColorNumber);
-    let colorTwo = colorShift.g>115?colorShift.g-20:colorshift+20;
-    colorTwo = rgbToHex(colorTwo);
-    bellyBulges[1].style.fill = colorTwo;
-    bellyBulges[2].style.fill = colorTwo;
+    let shiftedG = colorShift.g>115?colorShift.g-7:colorshift+12;
+    let ColorTwo = rgbToHex(colorshift.r, shiftedG, colorshift.b);
+    bellyBulges[1].style.fill = `#${colorTwo}`;
+    bellyBulges[2].style.fill = `#${colorTwo}`;
+    return false;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//sha256 implementation in JS for generating color sets
+//sha256 implementation in JS (for me to generate raw color sets)
 //https://geraintluff.github.io/sha256/
 const sha256 = (ascii) => {
 	function rightRotate(value, amount) {
