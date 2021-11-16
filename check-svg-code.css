@@ -1,3 +1,15 @@
+.color-swatch{
+  height: 100px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.individual-swatch{
+  width: 100px;
+  height: 100px;
+  margin: 14px;
+  border: black solid;
+  border-radius: 10px;
+}
 .kritter-card{
     width: 395px;
     height: 580px;

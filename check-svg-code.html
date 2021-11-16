@@ -9,7 +9,7 @@
     
      </head>
      <body>
-
+      <div class="color-swatch"></div>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 357.25 538.43" display="none">
         <symbol id="whole_figure">
          <title>City Kritters assets</title>
@@ -124,28 +124,18 @@
                         56: 'Eye Color',        78: 'Ears/Paws'}-->
 
     <div class="kritter-card">
-      <svg width="300" height="500" viewBox="0 0 300 500">
+      <svg width="300" height="500" viewBox="0 0 300 500" stroke="#39FF15">
         <use xlink:href="#whole_figure" id="whole_figure_uniqueId" />
       </svg>
     </div>
-    <div class="form-group">
-      <label for="formControlRange"><b>Head and Stroke</b><span class="badge badge-dark ml-2" id="head_code"></span></label>
-      <input type="range" min="10" max="98" class="form-control-range" id="head_color_slider">
-    </div>
-    <div class="form-group">
-      <label for="formControlRange"><b>Body</b><span class="badge badge-dark ml-2" id="body_code"></span></label>
-      <input type="range" min="10" max="98" class="form-control-range" id="body_color_slider">
-    </div>
-    <div class="form-group">
-      <label for="formControlRange"><b>Eyes</b><span class="badge badge-dark ml-2" id="eyes_code"></span></label>
-      <input type="range" min="10" max="98" class="form-control-range" id="eyes_color_slider">
-    </div>
-    <div class="form-group">
-      <label for="formControlRange"><b>Limbs</b><span class="badge badge-dark ml-2" id="limbs_code"></span></label>
-      <input type="range" min="10" max="98" class="form-control-range" id="limbs_color_slider">
+    <div class="user-input">
+      <!-- try working it out with 'form action' statement next-->
+      <form id="form_user_input">
+        <input id="text_user_input" type="text" placeholder='Enter name to meet your new Kritter!'>
+        <button type='submit' onclick='manifestNewKritter(); return false;'>Yay!!</button>
+      </form>
     </div>
   </div>
-  <div class="color-swatch"></div>
   <script src='check-svg-code.js' rel='javascript'></script>
 </body>
 </html>

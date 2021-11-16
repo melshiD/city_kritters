@@ -1,5 +1,28 @@
-//Color swatch array generation:
+//Color swatch array generation and useful hex manipulation functions:
+const componentToHex = function (c){
+    var hex = c.toString(16);
+    console.log(hex);
+    return hex.length == 1 ? '0' + hex : hex;
+}
 
+function rgbToHex(r, g, b){
+    return `#${componentToHex(r)}${componentToHex(g)}${componentToHex(b)}`;
+}
+
+function hexToRgb(hex) {
+    // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+    var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+      return r + r + g + g + b + b;
+    });
+  
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  }
 
 function hashToColorArray(inputHash){
     let colorArray = [];
@@ -11,60 +34,78 @@ function hashToColorArray(inputHash){
     return colorArray;
 }
 
-const componentToHex =function (c){
-    var hex = c.toString(16);
-    return hex.length == 1 ? '0' + hex : hex;
+//const colorArray = custInput => hashToColorArray(sha256(custInput));
+
+//const submitFormTarget = document.getElementById('form_user_input');
+//submitFormTarget.addEventListener('submit', manifestNewKritter);
+
+function manifestNewKritter(){
+    let userInput = document.getElementById('text_user_input').value;
+    let colorArray = hashToColorArray(sha256(userInput));
+    changeHeadFill(colorArray[0]);
+
 }
 
-function rgtToHex(r, g, b){
-    return `#${componentToHex(r)}${componentToHex(g)}${componentToHex(b)}`;
-}
-
-const colorArray = custInput => hashToColorArray(sha256(custInput));
-
-function makeColorSwatch(inputArray){
-    var swatchNode = document.getElementsByClassName('color-swatch')[0];
+function makeColorSwatch(userInput){
+    let userInputToColorArray = hashToColorArray(sha256(userInput));
+    let swatchNode = document.getElementsByClassName('color-swatch')[0];
     //let swatchCode = document.getElementsByClassName('color-swatch')[0];
-    for(let i=0; i<inputArray.length;i++){
+    for(let i=0; i<userInputToColorArray.length;i++){
         let newNode = document.createElement('div');
-        newNode.setAttribute('width', '50px');
-        newNode.setAttribute('height', '50px');
-        newNode.setAttribute('border', 'solid black');
-        newNode.setAttribute('background', inputArray[i]);
+        newNode.setAttribute('class', 'individual-swatch');
+        newNode.style.backgroundColor = userInputToColorArray[i];
         swatchNode.appendChild(newNode);
     }
-    console.log(swatchNode);
+    return swatchNode;
 }
-
-//begin control of head/stroke slider (called Slider 1);
-const headColorSlider = document.getElementById('head_color_slider');
-
-const changeStrokeColor = (newStrokeColorNumber) =>{
+//Change head fill and all stroke
+const changeHeadFill = (newHeadColorNumber) => {
+    let kritterHead = document.getElementById('g_head');
+    kritterHead.setAttribute('fill', newHeadColorNumber);
+}
+const changeStrokeColor = (newStrokeColorNumber) => {
     let allStrokes = document.getElementById('whole_figure_uniqueId');
     allStrokes.setAttribute('stroke', newStrokeColorNumber);
     allStrokes.setAttribute('stroke-width', '5px');
 }
 
-const changeHeadColor = (newHeadColorNumber) => {
-    let kritterHead = document.getElementById('g_head');
-    kritterHead.setAttribute('fill', newHeadColorNumber);
+//change body color
+const changeBellyFill = (newBellyColorNumber) => {
+    let bellyBulges = document.getElementById('g_belly').querySelectorAll('[class*="belly-"]');
+    bellyBulges[0].style.fill = newBellyColorNumber;
+    let colorShift = hexToRgb(newBellyColorNumber);
+    let colorTwo = colorShift.g>115?colorShift.g-20:colorshift+20;
+    colorTwo = rgbToHex(colorTwo);
+    bellyBulges[1].style.fill = colorTwo;
+    bellyBulges[2].style.fill = colorTwo;
 }
 
-const updateHeadCode = () => {
-    document.getElementById("head_code").textContent = headColorSlider.value;
-}
-
-headColorSlider.addEventListener("change", function() {
-    changeStrokeColor('red');
-    changeHeadColor('pink');
-    updateHeadCode();
-}, false);
-//End of Slider 1 functionality
 
 
 
 
-//Slider 2, body
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -168,4 +209,3 @@ const sha256 = (ascii) => {
 	}
 	return result;
 };
-
