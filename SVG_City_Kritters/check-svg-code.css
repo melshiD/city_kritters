@@ -1,3 +1,7 @@
+
+body{
+  background: url(./../../../Illustrator\ Files\ for\ SVG/Kritter_Hang.jpg);
+}
 .color-swatch{
   height: 100px;
   display: flex;
@@ -15,7 +19,7 @@
     height: 400px;
     padding-left: 30px;
     text-align: center;
-    background:;
+    background: url(./../../../cattributes.PNG);
     border: solid orangered 2px;
     border-radius: 10px;
 }
