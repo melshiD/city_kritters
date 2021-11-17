@@ -11,6 +11,11 @@
      <body>
       <div class="color-swatch"></div>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 357.25 538.43" display="none">
+        <symbol id="#background_image">
+          <title>Background Image</title>
+          <desc>Background Image Group</desc>
+          <image xlink:href="./../Kritter_Hang.jpg" />
+        </symbol>
         <symbol id="whole_figure">
          <title>City Kritters assets</title>
          <desc> and exploration for blockchain academy project</desc>
@@ -124,8 +129,11 @@
                         56: 'Eye Color',        78: 'Ears/Paws'}-->
 
     <div class="kritter-card">
+      <div id="kritter_background" background=url()></div>
       <svg width="300" height="400" viewBox="-50 -30 520 600" stroke="black">
+        <use xlink:href="#background_image" />
         <use xlink:href="#whole_figure" id="whole_figure_uniqueId" />
+        
       </svg>
     </div>
     <div class="user-input">
