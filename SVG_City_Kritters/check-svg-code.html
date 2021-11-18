@@ -10,17 +10,17 @@
      </head>
      <body>
       <div class="color-swatch"></div>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 357.25 538.43" display="none">
-        <symbol id="#background_image">
+      <svg xmlns="http://www.w3.org/2000/svg" display="none">
+        <symbol id="background_image">
           <title>Background Image</title>
           <desc>Background Image Group</desc>
-          <image xlink:href="./../Kritter_Hang.jpg" />
+          <image  xlink:href="./../Kritter_Hang.jpg" />
         </symbol>
-        <symbol id="whole_figure">
+        <symbol id="whole_figure" stroke='black' >
          <title>City Kritters assets</title>
          <desc> and exploration for blockchain academy project</desc>
-         <g id="g_arms_left">
-           <path class="arms-left-top"
+         <g id="g_arms_left" >
+           <path class="arms-left-top" 
              d="M241.81,440.57c-4.66-10.69-14.78-15.28-18.38-16.85-21.6-9.41-48.17,1.11-64.34,13.79-20.18,15.81-34.23,42.85-27.58,51.32,3.31,4.21,11.4,3.39,14.55,3.06,10.57-1.08,17.51-8.34,22.09-13.28,10.22-11,7.09-15.9,14.68-21.18,9.87-6.88,23.38-4.31,29.87-3.07,16.78,3.2,23.18,11.82,28.34,8.43S245.07,448.07,241.81,440.57Z"
              transform="translate(-126.02 -178.76)" />
            <path class="arms-left-middle"
@@ -129,18 +129,17 @@
                         56: 'Eye Color',        78: 'Ears/Paws'}-->
 
     <div class="kritter-card">
-      <div id="kritter_background" background=url()></div>
-      <svg width="300" height="400" viewBox="-50 -30 520 600" stroke="black">
-        <use xlink:href="#background_image" />
-        <use xlink:href="#whole_figure" id="whole_figure_uniqueId" />
-        
+      <svg width="1000" height="1000" viewBox="1500 1500 3000 3000" id="kritter_to_browser">
+        <use xlink:href="#background_image" transform="translate(200 0)"/>
+        <use xlink:href="#whole_figure" id="whole_figure_uniqueId" transform="translate(1900 2240), scale(-.7, .7)" />
+
       </svg>
+      
     </div>
     <div class="user-input">
       <!-- try working it out with 'form action' statement next-->
       <form id="form_user_input" class="user-form">
         <input id="text_user_input" type="text" placeholder='Enter name to meet your new Kritter!'>
-        <!--button type='submit' onclick='manifestNewKritter();'>Yay!!</button-->
         <button type='submit' id="button_submit">Yay!!</button>
       </form>
     </div>
