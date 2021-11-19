@@ -1,7 +1,4 @@
 
-body{
-  overflow: hidden;
-}
 .color-swatch{
   height: 100px;
   display: flex;
@@ -20,7 +17,8 @@ body{
     border: solid orangered 3px;
     border-radius: 6px;
     background: orangered;
-    overflow: hidden;
-    
-    
+
+}
+#kritter_to_browser{
+  padding: '20px';
 }
