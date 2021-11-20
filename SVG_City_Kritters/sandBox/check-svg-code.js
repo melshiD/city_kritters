@@ -48,9 +48,7 @@ function hashToColorArray(inputHash){
 function manifestNewKritter(){
     let userInput = document.getElementById('text_user_input').value;
     let colorArray = hashToColorArray(sha256(userInput));
-
-    //makeColorSwatch(userInput);
-
+	makeColorSwatch(userInput);
     document.getElementById('g_head').style.stroke = colorArray[3];
     document.getElementById('g_mouth').style.stroke = colorArray[3];
     document.querySelector('[class="mouth-volume"]').style.fill = colorArray[7];
@@ -66,6 +64,8 @@ function manifestNewKritter(){
     console.log(justTrying);
     justTrying[0].style.fill = colorArray[5];
 
+	
+	
     let colorShift = hexToRgb(colorArray[5]);
     if(colorShift.g>155){
         colorShift.g -= 7;
@@ -76,7 +76,9 @@ function manifestNewKritter(){
 
     let bellyColorTwo = rgbToHex(colorShift);
     justTrying[2].style.fill = bellyColorTwo;
+
     let ColorTwo = rgbToHex(colorshift.r, shiftedG, colorshift.b);
+	
 
 }
 

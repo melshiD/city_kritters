@@ -4,24 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>City Kritters Demo</title>
     <link rel="stylesheet" href="check-svg-code.css">
     
      </head>
      <body>
-      <div class="color-swatch"></div>
-      <svg xmlns="http://www.w3.org/2000/svg" display="none">
+      
+      <svg xmlns:xlink="http://www.w3.org/2000/svg" display="none">
         <symbol id="background_image">
           <title>Background Image</title>
           <desc>Background Image Group</desc>
-          <image  xlink:href="./../Kritter_Hang.jpg" />
+          <image  xlink:href="Kritter_Hang.jpg" />
         </symbol>
-        <symbol id="whole_figure" stroke='black' >
-         <animate attributeType="XML" attributeName="viewBox" from="-50 50 3000 5000" to="-20 20 100 150" dur="12s" fill="freeze" />
+        <symbol stroke='black' id="whole_figure">
+        <g id="whole_figure_group">
          <!--animate attributeType="XML" attributeName="viewBox" from="1500 1500 3000 3000" to="1200 1400 3500 3500" dur="15s" fill="freeze" /-->
          <title>City Kritters assets</title>
          <desc> and exploration for blockchain academy project</desc>
-         
          <g id="g_arms_left" >
            <path class="arms-left-top" 
              d="M241.81,440.57c-4.66-10.69-14.78-15.28-18.38-16.85-21.6-9.41-48.17,1.11-64.34,13.79-20.18,15.81-34.23,42.85-27.58,51.32,3.31,4.21,11.4,3.39,14.55,3.06,10.57-1.08,17.51-8.34,22.09-13.28,10.22-11,7.09-15.9,14.68-21.18,9.87-6.88,23.38-4.31,29.87-3.07,16.78,3.2,23.18,11.82,28.34,8.43S245.07,448.07,241.81,440.57Z"
@@ -105,7 +104,9 @@
              d="M292.11,275.41c-18.88-18.19-34.3-29.36-54.5-36.37a140.1,140.1,0,0,0-25.49-6.24c11.75-20.25,30.33-35.71,45.52-32.74C278.05,204.06,296.07,242.07,292.11,275.41Z"
              transform="translate(-126.02 -178.76)" />
          </g>
-         </symbol>
+         </g>
+
+        </symbol>
        </svg>
     <!-- GOOD EXAMPLE OF HOW TO ANIMATE GROUPS AND USE animateTransform proprety
     <svg class="tower owner" height="60" width="60" viewBox="-35 -5 300 300">
@@ -134,15 +135,23 @@
                         
     <!-- ROACH DNA: {   12: 'head and body',    34: 'mouth/belly/tail', 
                         56: 'Eye Color',        78: 'Ears/Paws'}-->
-
-    <div class="kritter-card" style="overflow: hidden">
+    <div class="color-swatch"></div>
+    <div class="kritter-card" style="overflow:hidden">
       <svg id="kritter_to_browser" width="1000" height="1000" viewBox="1500 1500 3000 3000" >
-        <!--animate attributeType="XML" attributeName="viewBox" from="1500 1500 3000 3000" to="1200 1400 3500 3500" dur="15s" fill="freeze" /-->
-        <use xlink:href="#background_image" transform="translate(0 0)"/>
-        <use xlink:href="#whole_figure" id="whole_figure_uniqueId" transform="translate(1900 2240), scale(-.7, .7)" viewBox="0 0 5000 5000"/>
+        <g id="background_group" transform="translate(200, 0)">
+          <use xlink:href="#background_image"/>
+        </g>
+        <g id="whole_figure_uniqueId" >
+          <animate attributeType="XML" attributeName="transform" type="translate"
+            from="0 0" to="2000 2800" repeatCount="indefinite" dur="10s"/>
+          <g id="and_scale_me">
+            <use xlink:href="#whole_figure" transform="translate(1900 2240), scale(-1, 1)" viewBox="0 0 5000 5000"/>
+          </g>
+        </g>
       </svg>
       
     </div>
+
     <div class="user-input">
       <!-- try working it out with 'form action' statement next-->
       <form id="form_user_input" class="user-form">
