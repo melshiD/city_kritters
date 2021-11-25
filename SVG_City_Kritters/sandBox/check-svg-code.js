@@ -48,7 +48,7 @@ function hashToColorArray(inputHash){
 function manifestNewKritter(){
     let userInput = document.getElementById('text_user_input').value;
     let colorArray = hashToColorArray(sha256(userInput));
-	//makeColorSwatch(userInput);
+	makeColorSwatch(userInput);
     document.getElementById('g_head').style.stroke = colorArray[3];
     document.getElementById('g_mouth').style.stroke = colorArray[3];
     document.querySelector('[class="mouth-volume"]').style.fill = colorArray[7];
