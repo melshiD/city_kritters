@@ -1,11 +1,39 @@
 body{
-  background: rgb(239, 242, 247)
+  background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url('../pictures/bike_near_truck.jpg');
+  background-position: 25% 25%;
 }
 .content-class{
+  width: 25vw;
+  height: content;
+  border: solid rgb(187, 72, 30)  5px;
+  border-radius: 10px;
   display: grid;
-  grid-template: 2fr/1fr;
+  grid-template: 1fr/2fr;
   grid-gap: 14px;
 }
+
+.kritter-card{
+  grid-area: 1/1;
+  width: 300px;
+  height: 400px;
+  border: solid rgb(187, 72, 30) 3px;
+  border-radius: 6px;
+  box-shadow: 2px 3px 5px;
+}
+.user-input{
+  grid-area: 2/2;
+}
+.text-user-input::-webkit-input-placeholder{
+  font-size: 0.75em;
+  opacity: 0.8;
+  color: orangered;
+}
+
+
+
+
+
+/* SOME CLASSES USED FOR TESTING
 .color-swatch{
   height: 100px;
   display: flex;
@@ -18,15 +46,4 @@ body{
   border: black solid;
   border-radius: 10px;
 }
-.kritter-card{
-  width: 300px;
-  height: 400px;
-  border: solid rgb(187, 72, 30) 3px;
-  border-radius: 6px;
-  box-shadow: 2px 3px 5px;
-}
-.text-user-input::-webkit-input-placeholder{
-  font-size: 0.75em;
-  opacity: 0.8;
-  color: orangered;
-}
+*/

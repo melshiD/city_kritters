@@ -135,33 +135,31 @@
                         
     <!-- ROACH DNA: {   12: 'head and body',    34: 'mouth/belly/tail', 
                         56: 'Eye Color',        78: 'Ears/Paws'}-->
-    <div class="color-swatch"></div>
     <div class="content-class">
-    <div class="kritter-card" style="overflow:hidden">
-      <svg id="kritter_to_browser" width="1000" height="1000" viewBox="1500 1500 3000 3000" >
-        <g id="background_group" transform="translate(200, 0)">
-          <use xlink:href="#background_image"/>
-        </g>
-        <g id="whole_figure_uniqueId" >
-          <animate attributeType="XML" attributeName="transform" type="translate"
-            from="0 0" to="2000 2800" repeatCount="indefinite" dur="10s"/>
-          <g id="and_scale_me">
-            <use xlink:href="#whole_figure" transform="translate(1900 2240), scale(-1, 1)" viewBox="0 0 5000 5000"/>
+      <div class="kritter-card" style="overflow:hidden">
+        <svg id="kritter_to_browser" width="1000" height="1000" viewBox="1500 1500 3000 3000" >
+          <g id="background_group" transform="translate(200, 0)">
+            <use xlink:href="#background_image"/>
           </g>
-        </g>
-      </svg>
+          <g id="whole_figure_uniqueId" >
+            <animate attributeType="XML" attributeName="transform" type="translate"
+              from="0 0" to="2000 2800" repeatCount="indefinite" dur="10s"/>
+            <g id="and_scale_me">
+              <use xlink:href="#whole_figure" transform="translate(1900 2240), scale(-1, 1)" viewBox="0 0 5000 5000"/>
+            </g>
+          </g>
+        </svg>
+      </div>
       
+      <div class="user-input">
+        <!-- try working it out with 'form action' statement next-->
+        <form id="form_user_input" class="user-form">
+          <input id="text_user_input" class="text-user-input" type="text" placeholder='Enter name to meet your new Kritter!'>
+          <button type='submit' id="button_submit">Kritter Me</button>
+        </form>
+      </div>
     </div>
-
-    <div class="user-input">
-      <!-- try working it out with 'form action' statement next-->
-      <form id="form_user_input" class="user-form">
-        <input id="text_user_input" class="text-user-input" type="text" placeholder='Enter name to meet your new Kritter!'>
-        <button type='submit' id="button_submit">Kritter Me</button>
-      </form>
-    </div>
-  </div>
-  <script src='check-svg-code.js' rel='javascript'></script>
-</body>
+    <script src='check-svg-code.js' rel='javascript'></script>
+  </body>
 </html>
 
