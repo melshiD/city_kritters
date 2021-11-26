@@ -48,7 +48,7 @@ function hashToColorArray(inputHash){
 function manifestNewKritter(){
     let userInput = document.getElementById('text_user_input').value;
     let colorArray = hashToColorArray(sha256(userInput));
-	makeColorSwatch(userInput);
+	//makeColorSwatch(userInput);
     document.getElementById('g_head').style.stroke = colorArray[3];
     document.getElementById('g_mouth').style.stroke = colorArray[3];
     document.querySelector('[class="mouth-volume"]').style.fill = colorArray[7];
@@ -83,13 +83,13 @@ function manifestNewKritter(){
 }
 
 function makeColorSwatch(userInput){
-    let userInputToColorArray = hashToColorArray(sha256(userInput));
+    let userInputAsColorArray = hashToColorArray(sha256(userInput));
     let swatchNode = document.getElementsByClassName('color-swatch')[0];
     //let swatchCode = document.getElementsByClassName('color-swatch')[0];
-    for(let i=0; i<userInputToColorArray.length;i++){
+    for(let i=0; i<userInputAsColorArray.length;i++){
         let newNode = document.createElement('div');
         newNode.setAttribute('class', 'individual-swatch');
-        newNode.style.backgroundColor = userInputToColorArray[i];
+        newNode.style.backgroundColor = userInputAsColorArray[i];
         swatchNode.appendChild(newNode);
     }
     return swatchNode;

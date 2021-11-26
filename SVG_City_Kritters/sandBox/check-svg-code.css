@@ -3,17 +3,17 @@ body{
   background-position: 25% 25%;
 }
 .content-class{
-  width: 25vw;
+  width: content;
   height: content;
   border: solid rgb(187, 72, 30)  5px;
   border-radius: 10px;
   display: grid;
-  grid-template: 1fr/2fr;
+  grid-template: 5fr/7fr;
   grid-gap: 14px;
 }
 
 .kritter-card{
-  grid-area: 1/1;
+  grid-area: 1/2/span 2/span 3;
   width: 300px;
   height: 400px;
   border: solid rgb(187, 72, 30) 3px;
@@ -21,7 +21,7 @@ body{
   box-shadow: 2px 3px 5px;
 }
 .user-input{
-  grid-area: 2/2;
+  grid-area: 1/5/span 2/ span 2;
 }
 .text-user-input::-webkit-input-placeholder{
   font-size: 0.75em;
