@@ -1,66 +1,65 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>SVG exercises</title>
-  <style>
-    .main-container {
-      display: flex;
-    }
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Use in Use demo</title>
+    <style>
+      body{
+        width: 90vw;
+        height: 90vh;
+        border: 20px solid blue;
+        overflow: hidden;
+        margin: 2em auto;
 
-    .card-container {
-      min-width: 200px;
-      max-width: 400px;
-      min-height: 200px;
-      max-height: 400px;
-      height: auto;
-      border: 5px solid black;
-      border-radius: 10px;
-      overflow: hidden;
-      background-color: #a9adda;
-      margin: 10px;
-    }
-    body {
-      background: linear-gradient(.5turn, rgb(163, 17, 17), 20%, rgb(2, 2, 61));
-    }
-  </style>
+
+      }
+      .card{
+        min-width: 90px;
+        max-width: 50vw;
+      }
+    </style>
 </head>
-
 <body>
-  <div class="main-container">
-  <svg height="0" viewBox="-10000 -10000 15000 15000">
-    <symbol id="circ_symbol">
-      <title>Some circles for testing purposes</title>
-      <desc>Some circles for testing purposes</desc>
-      <circle cx="500" cy="-2000" r="40">
-        <animate attributeName="cy" values="-2000;2000;-2000" dur="6s" repeatCount="indefinite" />
-      </circle>
-      <circle cx='-10000' cy='-10500' r='2000' />
-      <circle cx='10000' cy='-10500' r='20' />
-      <circle cx='100' cy='500' r='20' />
-      <circle cx='200' cy='500' r='20' />
-      <circle cx='300' cy='500' r='20' />
-      <circle cx='400' cy='500' r='20' />
-      <circle cx='500' cy='500' r='20' />
-      <circle cx='600' cy='500' r='20' />
-    </symbol>
-  </svg>
-  <div class="card-container">
-    <svg viewBox="0 -100 600 600">
-      <use xlink:href="#circ_symbol" />
+    <svg id="main_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+      <defs>
+        <g id="group_of_balls">
+          <circle cx="150" cy="50" r="20" />
+          <circle cx="150" cy="150" r="20" />
+          <circle cx="100" cy="100" r="20" />
+          <circle cx="50" cy="50" r="20" />
+          <circle cx="50" cy="150" r="20" />
+        </g>
+      </defs>
+      <defs>
+        <g id="big_composite_group">
+          <use xlink:href="#group_of_balls" x="200" fill="#4f0433">
+            <!-- <animateTransform attributeName="transform"
+                          attributeType="XML"
+                          type="rotate"
+                          from="0"
+                          to="360"
+                          dur="10s"
+                          repeatCount="indefinite"/> -->
+          </use>
+          <use xlink:href="#group_of_balls" x="400" fill="#4f3" />
+          <use xlink:href="#group_of_balls" x="200" y="200" fill="#0433" />
+          <use xlink:href="#group_of_balls" x="400" y="400" fill="#050433" />
+          <use xlink:href="#group_of_balls" y="400" fill="pink" />
+        </g>
+      </defs>
+      <use xlink:href="#big_composite_group" x="600"/>
+      <use xlink:href="#big_composite_group" x="1200"/>
+      <use xlink:href="#big_composite_group" />
+      <use xlink:href="#big_composite_group" />
+      <use xlink:href="#big_composite_group" />
+      <use xlink:href="#group_of_balls" />
     </svg>
-  </div>
-  <div class="card-container">
-    <svg viewBox="-100 200 3000 3000">
-      <use xlink:href="#circ_symbol" />
-    </svg>
-  </div>
-  <div class="card-container">
-    <svg viewBox="-2000 -2000 3000 3000" fill="#44f31e">
-      <use xlink:href="#circ_symbol" />
-    </svg>
-  </div>
-</div>
-
+    <div class="card">
+      <svg viewBox="340 340 400 400">
+        <use xlink:href="#big_composite_group" fill="black" />
+      </svg>
+    </div>
 </body>
-
 </html>
