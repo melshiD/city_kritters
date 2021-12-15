@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Use in Use demo</title>
+    <style>
+      body{
+        width: 90vw;
+        height: 90vh;
+        border: 20px solid blue;
+        overflow: hidden;
+        margin: 2em auto;
+      .hide-svg{
+        display: none;
+      }
+
+      }
+      .card{
+        min-width: 90px;
+        max-width: 50vw;
+      }
+    </style>
+</head>
+<body>
+  <div class="hide-svg"></div>
+    <svg id="main_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+      <defs>
+        <g id="group_of_balls">
+          <circle cx="150" cy="50" r="20" />
+          <circle cx="150" cy="150" r="20" />
+          <circle cx="100" cy="100" r="20" />
+          <circle cx="50" cy="50" r="20" />
+          <circle cx="50" cy="150" r="20" />
+        </g>
+      </defs>
+      <defs>
+        <g id="big_composite_group">
+          <use xlink:href="#group_of_balls" x="200" fill="#4f0433">
+            <!-- <animateTransform attributeName="transform"
+                          attributeType="XML"
+                          type="rotate"
+                          from="0"
+                          to="360"
+                          dur="10s"
+                          repeatCount="indefinite"/> -->
+          </use>
+          <use xlink:href="#group_of_balls" x="400" fill="#4f3" />
+          <use xlink:href="#group_of_balls" x="200" y="200" fill="#0433" />
+          <use xlink:href="#group_of_balls" x="400" y="400" fill="#050433" />
+          <use xlink:href="#group_of_balls" y="400" fill="pink" />
+        </g>
+      </defs>
+      <use xlink:href="#big_composite_group" x="600"/>
+      <use xlink:href="#big_composite_group" x="1200"/>
+      <use xlink:href="#big_composite_group" />
+      <use xlink:href="#big_composite_group" />
+      <use xlink:href="#big_composite_group" />
+      <use xlink:href="#group_of_balls" />
+    </svg>
+  </div>
+
+    <div class="card">
+      <svg viewBox="340 340 400 400">
+        <use xlink:href="#big_composite_group" fill="black" />
+      </svg>
+    </div>
+</body>
+</html>
