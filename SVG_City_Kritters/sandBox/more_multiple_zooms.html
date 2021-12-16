@@ -1,33 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Give a Name Demo</title>
+  <title>Dancing Rectangles</title>
+  <link rel="stylesheet" href="outOfWay.css">
   <style>
-    body{
-      /* background-image: url('../sandBox/Kritter_Hang.jpg'); */
-      background-size: contain;
-      background-repeat: no-repeat;
-      display:flex;
-      justify-content: flex-start;
+    .flex-me{
+      display: flex;
     }
-    svg:nth-of-type(2n){
-      border: green solid 5px;
+    .animate-me {
+    -webkit-animation: rotate 5s normal linear infinite;
+    animation: translate 10s normal linear infinite;
+  }
+  .outer-animation{
+    transform-origin: 50px 60px;
+    animation: rotate 20s ease-in-out infinite;
+  }
+  @keyframes rotate {
+    0% {
+      -webkit-transform: rotate3d(0, 0, 1, 0deg);
+      transform: rotate3d(0, 0, 1, 0deg);
+  
     }
+    25% {
+      -webkit-transform: rotate3d(0, 0, 1, 90deg);
+      transform: rotate3d(0, 0, 1, 90deg);
+    }
+    50% {
+      -webkit-transform: rotate3d(0, 0, 1, 180deg);
+      transform: rotate3d(0, 0, 1, 180deg);
+    }
+    75% {
+      -webkit-transform: rotate3d(0, 0, 1, 270deg);
+      transform: rotate3d(0, 0, 1, 270deg);
+    }
+    100% {
+      -webkit-transform: rotate3d(0, 0, 1, 360deg);
+      transform: rotate3d(0, 0, 1, 360deg);
+    }
+  }
+  
+  @keyframes translate {
+    0% {
+      -webkit-transform: rotate3d(0, 0, 1, 0deg);
+      transform: translateX(0px)
+  
+    }
+    25% {
+      -webkit-transform: rotate3d(0, 0, 1, 90deg);
+      transform: translateX(100px);
+    }
+    50% {
+      -webkit-transform: rotate3d(0, 0, 1, 180deg);
+          transform: translateX(200px);
+    }
+    75% {
+      -webkit-transform: rotate3d(0, 0, 1, 270deg);
+      transform: translateX(100px);
+    }
+    100% {
+      -webkit-transform: rotate3d(0, 0, 1, 360deg);
+      transform: translateX(0px);
+    }
+  }
   </style>
 </head>
 <body>
-  <svg xmlns:xlink="http://www.w3.org/2000/svg" viewBox="0 0 3024 4032" display="none">
-    <!-- <symbol id="background_image" viewBox="0 0 3024 4032"> -->
-    <symbol id="background_image" viewBox="1000 1000 1512 2016">
-      <title>Background Image</title>
-      <desc>Background Image Group</desc>
-      <image  xlink:href="../sandBox/Kritter_Hang.jpg" />
-    </symbol>
 
-
+  <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" height='0'>
     <symbol id="animated_single" display="hidden">
       <g class="animate-me">
       <!-- <symbol id="single_1" > -->
@@ -108,16 +151,22 @@
       </g>
       </g>
       </symbol>
-      <symbol id="composite">
-    <use href="#background_image"></use>
-    <use href="#animated_single" transform="scale(31)" x="10" y="80" fill="pink"></use>
-    <use href="#animated_single" transform="scale(12)" x="10" y="80" fill="darkgreen"></use>
-    <use href="#animated_single" transform="scale(4)" x="100" y="80" fill="blue"></use>
-    <use href="#animated_single" transform="scale(1)" x="1000" y="2000" fill="orange"></use>
-  </symbol>
-  </svg>  
-  <svg viewBox="0 0 3024 4032">
-    <use href="#composite"></use>
-  </svg>
+      </svg>
+
+      <div class="flex-me">
+      <svg viewBox="0 0 500 100" style="border: 2px solid red" width="500" height="100">
+        <use href="#animated_single"></use>
+      </svg>
+      <svg viewBox="0 0 500 100" style="border: 2px solid red" width="500" height="100">
+        <use href="#animated_single" transform="translateY(190)"></use>
+      </svg>
+      <svg viewBox="-0 0 250 50" style="border: 2px solid red" width="1000" height="200">
+        <use href="#animated_single"></use>
+      </svg>
+    </div>
+    <!-- </symbol> -->
+
+
 </body>
+
 </html>
