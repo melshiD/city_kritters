@@ -24,17 +24,26 @@ function generateCopies(numCopies){
         let theCopy = copyMe.cloneNode(true);
         container.appendChild(theCopy);
         theCopy.setAttribute('id', `whole_figure_${i}`);
-        theCopy.setAttribute('viewBox', '-1000 0 3024 4032');
+        // theCopy.setAttribute('viewBox', '-1000 0 3024 4032');
+        theCopy.setAttribute('viewBox', `0 0 ${3024/(i+1)} ${4032/(i+1)}`);
+        //need to make function to set viewBox per 'suitableLocations'
+
     }
 }   
 
 generateCopies(4);
 
+
+
+//now create the section to call the symbols
 let use = document.createElementNS(svgNs, 'use');
-document.getElementById('use_symbol').appendChild(use);
+
 use.setAttributeNS(svgLinkNs, 'href', '#whole_figure_0');
-use.setAttribute('transform', 'scale(4)');
-use.setAttribute('fill', 'red');
+use.setAttribute('transform', 'scale(10)');
+use.setAttribute('fill', 'pink');
+
+document.getElementById('use_symbol').appendChild(use);
+
 
 
 
@@ -45,3 +54,6 @@ use.setAttributeNS(svgLinkNs, 'href', '#whole_figure_1');
 
 
 
+let changeClass = document.getElementById('whole_figure_0');
+let svgGroup = changeClass.firstElementChild;
+svgGroup.classList.toggle('animate-me');
