@@ -5,26 +5,35 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thumbnails</title>
+  <title>Thumbnail Modes Explored</title>
   <style>
+    body {
+      display: flex;
+      /* flex-wrap: wrap; */
+      align-items: center;
+    }
 
+    .svg {
+      margin: 1em;
+      border: 4px solid pink;
+      align-self: contain;
+    }
+
+    .first-long {
+      display: inline;
+    }
   </style>
 </head>
 
 <body>
-  <div>
-  <p >
-    Look at me!
-  </p>
-</div>
   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" display="none">
 
     <symbol>
       <g id="Layer_1" data-name="Layer 1">
         <image height="4032" width="3024" href="../sandBox/Kritter_Hang.jpg"></image>
       </g>
-      <g id="Layer_2" data-name="Layer 2">
-        <g class="change1" id="front_left" stroke="pink" fill="pink">
+      <g id="Layer_2" data-name="Layer 2" fill='black'>
+        <g id="front_left" fill="black">
           <path class="cls-1"
             d="M559.49,3649.1c6.09,7,12.54,13.87,19.26,20.59-.07-12.6,2.8-25.56,10.93-37.33,2-2.8,11.7-28,39.51-23.47,22.06,3.5,28.23,27.46,31.66,47.7,4.9,29.08,2.59,35.66,10.16,60.18a30.28,30.28,0,0,0,1.47,3.78c.42.84.84,1.68,1.33,2.52.07.14.21.35.28.49l1,1.4c.56.84,1.12,1.61,1.75,2.39a36,36,0,0,0,2.66,2.94c.07.07.07.14.14.14,1,1,2,1.89,3,2.8.07.07.21.14.28.28,1,.77,2,1.54,3,2.31a72.29,72.29,0,0,0,6.93,4.41,38.87,38.87,0,0,0,3.51,1.9c2.73,1.4,5.46,2.59,7.91,3.64,1.26.49,2.45,1,3.57,1.4,3.51,1.26,6.45,2.17,8.34,2.8h.07c.28.07.56.14.77.21l.63.21a3.71,3.71,0,0,1,.77.21c36.15,13.8,35.52,12.89,49.88,24.94a297.74,297.74,0,0,0,79.15,6.8c121.12-6.45,246.65-94.5,274.18-182.77,4.83-15.55,6.66-31,4.83-46.16a96.08,96.08,0,0,0-9.66-31.94c-7.43-15.06-18.57-28.65-32-41a157.37,157.37,0,0,1-20.87,20.66q-3.78,3.15-7.78,6.1c-3.5,2.66-7.14,5.11-10.78,7.49-1.83,1.19-3.65,2.38-5.54,3.51a12.18,12.18,0,0,1-1.26.77c-2.38,1.47-4.83,2.87-7.28,4.2-5.61,3.15-11.35,6-17.17,8.69-2.66,1.26-5.25,2.45-7.91,3.57-2.1.91-4.13,1.75-6.24,2.59-1.89.77-3.78,1.54-5.67,2.24-3.92,1.54-7.92,3-11.91,4.34-2.31.84-4.55,1.62-6.86,2.32-2.74.91-5.47,1.75-8.13,2.52-5.32,1.68-10.65,3.15-15.9,4.48-2.87.84-5.68,1.54-8.48,2.17-3.08.7-6.09,1.47-9.17,2.1-4.28,1-8.55,1.83-12.68,2.67s-8.27,1.54-12.19,2.24c-1.54.28-3.08.49-4.55.77-10.58,1.68-20.18,2.94-28.45,3.92-1.61.14-3.22.35-4.69.49-1,.07-1.89.14-2.8.28-1.33.14-2.66.21-3.85.35-1.68.21-3.3.35-4.77.42a4.62,4.62,0,0,0-1,.07c-2.1.21-4,.35-5.6.42s-3,.14-4.13.21a16.41,16.41,0,0,1-1.69.14c-3.36.14-14.71.49-31.59-.28-1.4-.07-2.87-.14-4.34-.28-.91,0-2-.07-2.94-.14-2-.14-4.14-.28-6.24-.49-13.17-1-28.58-2.73-45.39-5.6-2.87-.56-5.74-1.05-8.69-1.61-5-1-10.15-2-15.41-3.23-8.75-2-17.79-4.27-27-7-1.89-.56-3.71-1.12-5.53-1.68-7.5-2.24-15.06-4.84-22.7-7.71-3.71-1.33-7.35-2.8-11.07-4.27s-7.56-3.15-11.34-4.83-7.64-3.44-11.42-5.33c-1.89-.91-3.78-1.82-5.61-2.8-3.78-2-7.56-3.92-11.34-6-.7-.35-1.48-.77-2.18-1.2a.26.26,0,0,1-.14-.06,175,175,0,0,1-41.19-20.25,124.65,124.65,0,0,1-42.73-48.61l-.07-.07c-4.06-4.7-7.91-9.6-11.69-14.71-14,14.78-24.87,32.22-29.57,52.67C488.11,3535.27,513.11,3595.58,559.49,3649.1Z" />
           <path class="cls-1" d="M705.89,3551.52c9.18,2.73,18.22,5,27,7C724,3556.49,715.07,3554.18,705.89,3551.52Z" />
@@ -218,8 +227,8 @@
           <path class="cls-16" d="M1304.78,1606.84" />
         </g>
       </g>
-      <g id="Layer_5" class="move" data-name="Layer 5">
-        <g fill="red" id="rear_mid">
+      <g id="Layer_5" data-name="Layer 5">
+        <g id="rear_mid">
           <path class="cls-17"
             d="M1960.56,2124.73c.67.77,1.39,1.53,2.14,2.28a7,7,0,0,1,1.21-4.14c.22-.31,1.3-3.1,4.38-2.61,2.45.39,3.13,3,3.52,5.3.54,3.22.28,4,1.12,6.67a2.63,2.63,0,0,0,.17.42,2.44,2.44,0,0,0,.14.28s0,0,0,.06l.11.15.2.27c.09.11.19.22.29.32l0,0,.33.31s0,0,0,0l.34.26a7.71,7.71,0,0,0,.77.49,2.93,2.93,0,0,0,.39.21c.3.15.6.29.88.4l.39.16.93.31h0l.09,0,.07,0,.09,0c4,1.53,3.94,1.43,5.53,2.77a32.79,32.79,0,0,0,8.78.75c13.44-.71,27.37-10.49,30.43-20.28a12.22,12.22,0,0,0,.53-5.12,10.6,10.6,0,0,0-1.07-3.55,15.7,15.7,0,0,0-3.55-4.55,17.32,17.32,0,0,1-2.32,2.29c-.28.23-.56.46-.86.68s-.79.56-1.2.83l-.61.39-.14.08c-.27.17-.54.32-.81.47-.62.35-1.26.67-1.9,1l-.88.4-.69.29-.63.25q-.66.26-1.32.48c-.26.09-.51.18-.77.25s-.6.2-.9.28c-.59.19-1.18.35-1.76.5l-.94.24c-.35.08-.68.17-1,.24l-1.41.29-1.35.25-.51.09c-1.17.18-2.24.32-3.15.43l-.52.05-.31,0-.43,0c-.19,0-.37,0-.53,0h-.11l-.62,0-.46,0h-.19c-.37,0-1.63.06-3.5,0a3.87,3.87,0,0,1-.48,0h-.33c-.23,0-.46,0-.69-.06-1.46-.11-3.17-.3-5-.62l-1-.18c-.56-.11-1.13-.22-1.71-.36-1-.21-2-.47-3-.77l-.61-.19c-.83-.25-1.67-.54-2.52-.85l-1.23-.48q-.63-.26-1.26-.54c-.42-.18-.84-.38-1.26-.59l-.63-.31c-.41-.21-.83-.43-1.25-.67a1.49,1.49,0,0,1-.25-.13h0a19.06,19.06,0,0,1-4.57-2.24,13.73,13.73,0,0,1-4.74-5.4h0c-.45-.52-.88-1.07-1.3-1.64a12.65,12.65,0,0,0-3.28,5.85C1952.64,2112.09,1955.41,2118.79,1960.56,2124.73Z" />
           <path class="cls-17" d="M1976.8,2113.9c1,.3,2,.56,3,.77C1978.82,2114.45,1977.82,2114.19,1976.8,2113.9Z" />
@@ -346,53 +355,135 @@
         </g>
       </g>
     </symbol>
-    <symbol id="composite_1" height="933" width="700" viewBox="600 1000 1512 2016">
-      <use href="#Layer_1"></use>
-      <use href="#Layer_2" x="200" y="-40"></use>
-      <use href="#Layer_3"></use>
-      <use href="#Layer_4"></use>
-      <use href="#Layer_5"></use>
-      <use href="#Layer_6"></use>
-    </symbol>
-    <symbol id="composite_2" height="933" width="700" viewBox="1560 2460 900 1200">
-      <use href="#Layer_1"></use>
-      <use href="#Layer_2"></use>
-      <use href="#Layer_3"></use>
-      <use href="#Layer_4"></use>
-      <use href="#Layer_5"></use>
-      <use href="#Layer_6"></use>
-    </symbol>
+  </svg>
 
-    <symbol id="composite_3" height="933" width="700" viewBox="1770 1900 756 1008">
+  <div class="svg">
+    <svg height="933" width="700" viewBox="600 1000 1512 2016">
       <use href="#Layer_1"></use>
       <use href="#Layer_2"></use>
       <use href="#Layer_3"></use>
       <use href="#Layer_4"></use>
       <use href="#Layer_5"></use>
       <use href="#Layer_6"></use>
-    </symbol>
-    <symbol id="composite_4" height="933" width="700" viewBox="1050 2250 756 1008">
-      <use href="#Layer_1"></use>
-      <use href="#Layer_2"></use>
-      <use href="#Layer_3"></use>
-      <use href="#Layer_4"></use>
-      <use href="#Layer_5"></use>
-      <use href="#Layer_6"></use>
-    </symbol>
-</svg>
-    <svg id='complete_composite' height="3732" width="700" viewBox="0 0 700 3732">
-      <use href="#composite_1"></use>
-      <use href="#composite_2" y="933"></use>
-      <use href="#composite_3" y="1866"></use>
-      <use href="#composite_4" y="2799"></use>
     </svg>
-    <script>
-      let svg = document.getElementById('complete_composite');
-
-      const animateSvg = () =>{
-        
-      }
-    </script>
+  </div>
+  <div class="svg">
+    <svg height="933" width="700" viewBox="1560 2460 900 1200">
+      <use href="#Layer_1"></use>
+      <use href="#Layer_2"></use>
+      <use href="#Layer_3"></use>
+      <use href="#Layer_4"></use>
+      <use href="#Layer_5"></use>
+      <use href="#Layer_6"></use>
+    </svg>
+  </div>
+  <div class="svg">
+    <svg height="933" width="700" viewBox="1770 1900 756 1008">
+      <use href="#Layer_1"></use>
+      <use href="#Layer_2"></use>
+      <use href="#Layer_3"></use>
+      <use href="#Layer_4"></use>
+      <use href="#Layer_5"></use>
+      <use href="#Layer_6"></use>
+    </svg>
+  </div>
+  <div class="svg">
+  <svg height="933" width="700" viewBox="1050 2250 756 1008">
+    <use href="#Layer_1"></use>
+    <use href="#Layer_2"></use>
+    <use href="#Layer_3"></use>
+    <use href="#Layer_4"></use>
+    <use href="#Layer_5"></use>
+    <use href="#Layer_6"></use>
+  </svg>
+  </div>
+  <div class="svg">
+    <svg height="300" width="700" viewBox="1770 1900 300 700">
+      <use href="#Layer_1"></use>
+      <use href="#Layer_2"></use>
+      <use href="#Layer_3"></use>
+      <use href="#Layer_4"></use>
+      <use href="#Layer_5"></use>
+      <use href="#Layer_6"></use>
+    </svg>
+  </div>
+  <div class="svg">
+    <svg height="400" width="400" viewBox="1050 2250 756 1008">
+      <use href="#Layer_1"></use>
+      <use href="#Layer_2"></use>
+      <use href="#Layer_3"></use>
+      <use href="#Layer_4"></use>
+      <use href="#Layer_5"></use>
+      <use href="#Layer_6"></use>
+    </svg>
+  </div>
+  <div class="svg">
+    <svg height="200" width="200" viewBox="1050 2250 756 1008">
+      <use href="#Layer_1"></use>
+      <use href="#Layer_2"></use>
+      <use href="#Layer_3"></use>
+      <use href="#Layer_4"></use>
+      <use href="#Layer_5"></use>
+      <use href="#Layer_6"></use>
+    </svg>
+  </div>
+  <div class="svg">
+    <svg height="100" width="100" viewBox="1050 2250 756 1008">
+      <use href="#Layer_1"></use>
+      <use href="#Layer_2"></use>
+      <use href="#Layer_3"></use>
+      <use href="#Layer_4"></use>
+      <use href="#Layer_5"></use>
+      <use href="#Layer_6"></use>
+    </svg>
+  </div>
+  <div class="svg">
+    <svg height="750" width="750" viewBox="1050 2250 756 1008">
+      <use href="#Layer_1"></use>
+      <use href="#Layer_2"></use>
+      <use href="#Layer_3"></use>
+      <use href="#Layer_4"></use>
+      <use href="#Layer_5"></use>
+      <use href="#Layer_6"></use>
+    </svg>
+  </div>
+    <div class="svg">
+      <!-- it's plain to see how the aspect ratio is only perserved when the width and height settings are in proportion to viewbox -->
+      <svg height="200" width="750" viewBox="1050 2250 756 1008">
+        <use href="#Layer_1"></use>
+        <use href="#Layer_2"></use>
+        <use href="#Layer_3"></use>
+        <use href="#Layer_4"></use>
+        <use href="#Layer_5"></use>
+        <use href="#Layer_6"></use>
+      </svg>
+    </div>
+    <div class="svg">
+      <svg height="300" width="900" viewBox="1100 1700 1000 333">
+        <use href="#Layer_1"></use>
+        <use href="#Layer_2"></use>
+        <use href="#Layer_3"></use>
+        <use href="#Layer_4"></use>
+        <use href="#Layer_5"></use>
+        <use href="#Layer_6"></use>
+      </svg>
+    </div>
+<script>
+  setTimeout(function () {
+    let char = document.getElementById('Layer_3');
+    let anim = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+    anim.setAttribute("attributeName", "transform");
+    anim.setAttribute("from", "scale(1)");
+    anim.setAttribute("to", "scale(5)");
+    anim.setAttribute("dur", "9s");
+    anim.setAttribute("begin", "0s");
+    anim.setAttribute("fill", "freeze");
+    //assume i have a rect element in my svg
+    char.append(anim);
+    console.log('working kinda');
+    anim.beginElement();
+  }, 500);
+</script>
 </body>
 
 </html>
