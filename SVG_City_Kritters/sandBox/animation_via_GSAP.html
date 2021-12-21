@@ -5,12 +5,11 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thumbnails</title>
+  <title>GSAP Thumbnails Trial</title>
   <style>
     .container{
       width: 300px;
       overflow: hidden;
-      margin: auto;
     }
   </style>
 </head>
@@ -385,7 +384,7 @@
     </symbol>
   </svg>
   <div class="container">
-  <svg id='complete_composite' height="933" width="700" viewBox="0 0 700 933">
+  <svg id='complete_composite' viewBox="0 0 700 933">
     <use href="#composite_1"></use>
     <use href="#composite_2" y="933"></use>
     <use href="#composite_3" y="1866"></use>
@@ -409,6 +408,22 @@
     tween.play();
     document.getElementById('complete_composite').onclick = () => tween.play();
   </script> -->
+  <script src="../../node_modules/animejs/lib/anime.min.js"></script>
+  <script>
+
+        let element = document.getElementById('complete_composite');
+        let animation = anime({
+            targets: element,
+            viewBox: '0 2799 700 933',
+            duration: 8000,
+            easing: 'linear',
+            autoplay: false
+        });
+        
+        // element.addEventListener('click', () => animation.play());
+        element.onclick = animation.play;
+
+  </script>
 </body>
 
 </html>
