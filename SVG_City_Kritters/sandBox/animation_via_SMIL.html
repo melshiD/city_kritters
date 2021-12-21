@@ -7,16 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thumbnails</title>
   <style>
-
   </style>
 </head>
 
 <body>
   <div>
-  <p >
-    Look at me!
-  </p>
-</div>
+    <p>
+      Look at me!
+    </p>
+  </div>
   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" display="none">
 
     <symbol>
@@ -379,38 +378,30 @@
       <use href="#Layer_5"></use>
       <use href="#Layer_6"></use>
     </symbol>
-</svg>
-    <svg id='complete_composite' height="933" width="700" viewBox="0 0 700 933">
-      <use href="#composite_1"></use>
-      <use href="#composite_2" y="933"></use>
-      <use href="#composite_3" y="1866"></use>
-      <use href="#composite_4" y="2799"></use>
-      <animate attributeName="viewBox" to="0 2799 700 933" dur="15s" fill="freeze" />
-    </svg>
-    <!-- <svg id='complete_composite' height="3732" width="700" viewBox="0 0 700 3732">
+  </svg>
+  <svg id='complete_composite' height="933" width="700" viewBox="0 0 700 933">
+    <use href="#composite_1"></use>
+    <use href="#composite_2" y="933"></use>
+    <use href="#composite_3" y="1866"></use>
+    <use href="#composite_4" y="2799"></use>
+    <!-- <animate attributeName="viewBox" to="0 2799 700 933" dur="15s" fill="freeze" /> -->
+  </svg>
+  <!-- <svg id='complete_composite' height="3732" width="700" viewBox="0 0 700 3732">
       <use href="#composite_1"></use>
       <use href="#composite_2" y="933"></use>
       <use href="#composite_3" y="1866"></use>
       <use href="#composite_4" y="2799"></use>
     </svg> -->
-    <script>
-      let svg = document.getElementById('complete_composite');
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js">
+    var tween = gsap.to('#complete_composite', {
+      viewBox: '0 2799 700 933',
+      duration: 4,
+      ease: 'elastic'
+    });
+    tween.play();
 
-
-      const animateSvg = (aniTime) => {
-        //let svgY = svg.getBoundingClientRect().y;
-        let svgY = 0;
-        let numFrames = aniTime * 60;
-        let timeDelayPerFrame = 1000 / 60;
-        let count = 0;
-
-        (async () => {
-            while (await new Promise(resolve => setTimeout(() => resolve(svgY += 10), timeDelayPerFrame)) < 10) {
-            svg.setAttribute('viewBox', `0 ${svgY} 700 933`);
-          }
-        })();
-      let newAnimation = animateSvg(1000);
-    </script>
+    document.getElementById('complete_composite').onclick = () => tween.play();
+  </script>
 </body>
 
 </html>
