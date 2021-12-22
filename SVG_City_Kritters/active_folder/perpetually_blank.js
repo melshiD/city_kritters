@@ -3,6 +3,12 @@ function NewKritter(name = "Finga Prin") {
     this.colorArray = createColorArray(name);
     this.newSymbol = generateNewSymbol(this.colorArray);
     this.useElement = generateUseElement(this.newSymbol);
+    // this.varyRender = varyRender(scale, x, y);
+    this.varyRender = (scale1 = 1, scale2 = 1, x = 0, y = 0) => {
+        this.useElement.setAttribute('transform', `scale(${scale1}, ${scale2})`);
+        this.useElement.setAttribute('x', `${x/scale1}px`);
+        this.useElement.setAttribute('y', `${y/scale1}px`);
+    }
 
     function generateNewSymbol(colorArray) {
         //this early implementation of the function is built
@@ -39,14 +45,20 @@ function NewKritter(name = "Finga Prin") {
         return colorArray;
     }
 
-    function generateUseElement(ns){
+    function generateUseElement(newSym){
         let svgNs = 'http://www.w3.org/2000/svg';
-        let useId = `#${ns.id}`;
+        let useId = `#${newSym.id}`;
         let useElem = document.createElementNS(svgNs, 'use');
         useElem.setAttribute('href', useId);
         // console.log(useElem);
         return useElem;
     }
+
+    // function varyRender(scale = 1, x = 0, y = 0){
+    //     this.useElement.setAttribute('transform', `scale(${scale})`);
+    //     this.useElement.setAttribute('x', `${x*scale}px`);
+    //     this.useElement.setAttribute('y', `${y*scale}px`);
+    // }
     //make a clone of the node, then apply new styles, then append to 
     //main_svg, then append a new <use> to the rendered section
     //Found this JS implementation of SHA256() on github
@@ -149,6 +161,9 @@ function NewKritter(name = "Finga Prin") {
     // return this;
 }
 
+//Make a new kritter symbol
+//Attach new symbol to declarations in html
+//Append use tag to render to browser
 
 const kritter = new NewKritter('dave');
 kritter.useElement.setAttribute('x', '200px');
@@ -160,9 +175,9 @@ kritter2.useElement.setAttribute('x', '200px');
 kritter2.useElement.setAttribute('y', '200px');
 
 const kritter3 = new NewKritter('Peter');
-kritter3.useElement.setAttribute('transform', 'scale(1.2)');
-kritter3.useElement.setAttribute('x', '300px');
-kritter3.useElement.setAttribute('y', '500px');
+// kritter3.useElement.setAttribute('transform', 'scale(1.2)');
+// kritter3.useElement.setAttribute('x', '300px');
+// kritter3.useElement.setAttribute('y', '500px');
 
 // const kritter4 = new NewKritter('Bong');
 // kritter4.useElement.setAttribute('transform', 'scale(.4)');
@@ -184,3 +199,7 @@ useBox.append(kritter.useElement);
 useBox.append(kritter2.useElement);
 useBox.append(kritter3.useElement);
 // useBox.append(kritter4.useElement);
+
+kritter3.varyRender(1, 1, 100, 300);
+
+
