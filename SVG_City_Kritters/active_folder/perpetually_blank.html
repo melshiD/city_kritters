@@ -1,73 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stage Setter</title>
     <style>
-        .stage{
-            width: 800px;
+        .stage {
+            width: 600px;
+            border: 4px pink solid;
+            border-radius: 2em;
         }
     </style>
 </head>
+
 <body>
     <svg display="none">
-        <!-- <symbol id="photo_2" viewBox="0 0 15120 16128"> -->
-        <symbol id="photo_2" viewBox="0 0 3024 4032">
+
+        <symbol id="photo_2">
             <image height="4032" width="3024" href="../../photos/melsh_2.jpg"></image>
         </symbol>
 
-        <!-- <symbol id="photo_3" viewBox="0 0 15120 16128"> -->
-        <symbol id="photo_3" viewBox="3024 0 3024 4032">
+        <symbol id="photo_3">
             <image height="4032" width="3024" href="../../photos/melsh_3.jpg"></image>
         </symbol>
 
-        <!-- <symbol id="photo_4" viewBox="0 0 15120 16128"> -->
-        <symbol id="photo_4" viewBox="0 0 3024 4032">
+        <symbol id="photo_4">
             <image height="4032" width="3024" href="../../photos/melsh_4.jpg"></image>
         </symbol>
 
-        <!-- <symbol id="photo_5" viewBox="0 0 15120 16128"> -->
-        <symbol id="photo_5" viewBox="0 0 3024 4032">
+        <symbol id="photo_5">
             <image height="4032" width="3024" href="../../photos/melsh_5.jpg"></image>
         </symbol>
 
-        <!-- <symbol id="photo_6" viewBox="0 0 15120 16128"> -->
-        <symbol id="photo_6" viewBox="0 0 3024 4032">
+        <symbol id="photo_6">
             <image height="4032" width="3024" href="../../photos/melsh_6.jpg"></image>
         </symbol>
 
-        <!-- <symbol id="photo_7" viewBox="0 0 15120 16128"> -->
-        <symbol id="photo_7" viewBox="0 0 3024 4032">
+        <symbol id="photo_7">
             <image height="4032" width="3024" href="../../photos/melsh_7.jpg"></image>
         </symbol>
 
-        <!-- <symbol id="photo_8" viewBox="0 0 15120 16128"> -->
-        <symbol id="photo_8" viewBox="0 0 3024 4032">
+        <symbol id="photo_8">
             <image height="4032" width="3024" href="../../photos/melsh_8.jpg"></image>
         </symbol>
 
-        <!-- <symbol id="photo_9" viewBox="0 0 15120 16128"> -->
-        <symbol id="photo_9" viewBox="0 0 3024 4032">
+        <symbol id="photo_9">
             <image height="4032" width="3024" href="../../photos/melsh_9.jpg"></image>
         </symbol>
-    <!-- <svg viewBox="0 0 700 933"> -->
-    <!-- <symbol id="main_stage" viewBox="0 0 15120 16128"> -->
-    <symbol id="main_stage" viewBox="0 0 3024 4032">
-        <use href="#photo_2"></use>
-        <use href="#photo_3" x="3024"></use>
-        <use href="#photo_4" x="6048"></use>
-        <use href="#photo_5" x="6048" y="4032"></use>
-        <use href="#photo_6" x="6048" y="8064"></use>
-        <use href="#photo_7" x="6048" y="12096"></use>
-        <use href="#photo_8" x="9072" y="12096"></use>
-        <use href="#photo_9" x="12096" y="12096"></use>
-    </symbol>  
+
+        <symbol id="main_stage" viewBox="0 0 3024 4032">
+            <!-- THIS IS THE VIEWBOX TO MODIFY TO TRAVERSE BETWEEN PANELS -->
+            <!-- getting rid of all the other symbol viewBox's fixed the issue of
+        not being able to transition between panels while 'zoomed in' -->
+            <use href="#photo_2"></use>
+            <use href="#photo_3" x="3024"></use>
+            <use href="#photo_4" x="6048"></use>
+            <use href="#photo_5" x="6048" y="4032"></use>
+            <use href="#photo_6" x="6048" y="8064"></use>
+            <use href="#photo_7" x="6048" y="12096"></use>
+            <use href="#photo_8" x="9072" y="12096"></use>
+            <use href="#photo_9" x="12096" y="12096"></use>
+        </symbol>
     </svg>
 
-    <svg class="stage" viewBox="0 0 9072 12096">
+    <svg class="stage" viewBox="0 0 3024 4032">
         <use href="#main_stage"></use>
     </svg>
+    <script src="../../node_modules/animejs/lib/anime.min.js"></script>
+    <script>
+        let tl = anime.timeline({
+            targets: '#main_stage',
+            easing: 'linear'
+        })
+
+        tl.add({
+            viewBox: "6048 0 3024 4032",
+            duration: 3000
+        }).add({
+            viewBox: "6048 12096 3024 4032",
+            duration: 4000
+
+        }).add({
+            viewBox: "12096 12096 3024 4032",
+            duration: 3000
+        });
+    </script>
 </body>
+
 </html>
