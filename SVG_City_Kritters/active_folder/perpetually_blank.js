@@ -1,22 +1,42 @@
+
 function NewKritter(name = "Finga Prin") {
     this.name = name;
     this.colorArray = createColorArray(name);
     this.newSymbol = generateNewSymbol(this.colorArray);
     this.useElement = generateUseElement(this.newSymbol);
-    // this.varyRender = varyRender(scale, x, y);
     this.varyRender = (scale1 = 1, scale2 = 1, x = 0, y = 0) => {
         this.useElement.setAttribute('transform', `scale(${scale1}, ${scale2})`);
         this.useElement.setAttribute('x', `${x/scale1}px`);
         this.useElement.setAttribute('y', `${y/scale1}px`);
+        return this;
     }
+    this.drawNow = () => {
+        let mainSvg = document.getElementById('main_svg'); 
+        let useBox = document.getElementById('use_box');
+        mainSvg.appendChild(this.newSymbol);
+        useBox.append(this.useElement);
+        return this;
+    }
+    this.createNestingGroupForUseElementAnimation = () => {
+        let parent = this.useElement.parentElement;
+        let svgNs = "http://www.w3.org/2000/svg";
 
+        parent.removeChild(this.useElement);
+        let newGTag = document.createElementNS(svgNs, 'g');
+        newGTag.setAttribute('id', `${this.newSymbol.id}_animation`);
+
+        newGTag.append(this.useElement);
+        parent.appendChild(newGTag);
+
+        return this;
+
+    }
     function generateNewSymbol(colorArray) {
         //this early implementation of the function is built
         //around assuming a single character copied many times.
         //New implementation will be required for larger character base
         let svgNs = "http://www.w3.org/2000/svg";
 
-        let mainSvg = document.getElementById('main_svg');
         let originalSymbol = document.getElementById('whole_figure');
         let newSymbol = originalSymbol.cloneNode(true);
 
@@ -28,10 +48,6 @@ function NewKritter(name = "Finga Prin") {
         newSymGrp[4].setAttribute('fill', colorArray[2]);
         newSymGrp[5].setAttribute('fill', colorArray[3]);
         //right and left eye will be handled by a separate function
-
-        // console.log(newSymGrp);
-        // console.log(newSymbol);
-
         return newSymbol;
 
     }
@@ -53,15 +69,6 @@ function NewKritter(name = "Finga Prin") {
         // console.log(useElem);
         return useElem;
     }
-
-    // function varyRender(scale = 1, x = 0, y = 0){
-    //     this.useElement.setAttribute('transform', `scale(${scale})`);
-    //     this.useElement.setAttribute('x', `${x*scale}px`);
-    //     this.useElement.setAttribute('y', `${y*scale}px`);
-    // }
-    //make a clone of the node, then apply new styles, then append to 
-    //main_svg, then append a new <use> to the rendered section
-    //Found this JS implementation of SHA256() on github
     function sha256(ascii) {
         function rightRotate(value, amount) {
             return (value >>> amount) | (value << (32 - amount));
@@ -158,48 +165,27 @@ function NewKritter(name = "Finga Prin") {
         }
         return result;
     };
-    // return this;
 }
 
-//Make a new kritter symbol
-//Attach new symbol to declarations in html
-//Append use tag to render to browser
+const kritter1 = new NewKritter('dave').varyRender(2, 2, 200, 200).drawNow();
+const kritter2 = new NewKritter('pink').varyRender(2, 3, 344, 220).drawNow();
+const kritter3 = new NewKritter('martin').varyRender(1, 1, 200, 1000).drawNow();
+const kritter4 = new NewKritter('valley').drawNow().varyRender(3, 3, 444, 333);
+// let animateMe = document.querySelectorAll('use');
+kritter1.createNestingGroupForUseElementAnimation();
+kritter2.createNestingGroupForUseElementAnimation();
+kritter3.createNestingGroupForUseElementAnimation();
+kritter4.createNestingGroupForUseElementAnimation();
 
-const kritter = new NewKritter('dave');
-kritter.useElement.setAttribute('x', '200px');
-kritter.useElement.setAttribute('y', '200px');
+let animateMe = document.querySelectorAll('[id*="animation"]');
 
-const kritter2 = new NewKritter('Dave');
-kritter2.useElement.setAttribute('transform', 'scale(2)');
-kritter2.useElement.setAttribute('x', '200px');
-kritter2.useElement.setAttribute('y', '200px');
-
-const kritter3 = new NewKritter('Peter');
-// kritter3.useElement.setAttribute('transform', 'scale(1.2)');
-// kritter3.useElement.setAttribute('x', '300px');
-// kritter3.useElement.setAttribute('y', '500px');
-
-// const kritter4 = new NewKritter('Bong');
-// kritter4.useElement.setAttribute('transform', 'scale(.4)');
-// kritter4.useElement.setAttribute('x', '3000px');
-// kritter4.useElement.setAttribute('y', '3500px');
-
-
-//attach new kritter to the main symbol declaration
-let mainSvg = document.getElementById('main_svg');
-mainSvg.appendChild(kritter.newSymbol);
-mainSvg.appendChild(kritter2.newSymbol);
-mainSvg.appendChild(kritter3.newSymbol);
-// mainSvg.appendChild(kritter4.newSymbol);
-
-//attach a <use> tag for the new element to the 
-//section containing all the <use> tags
-let useBox = document.getElementById('use_box');
-useBox.append(kritter.useElement);
-useBox.append(kritter2.useElement);
-useBox.append(kritter3.useElement);
-// useBox.append(kritter4.useElement);
-
-kritter3.varyRender(1, 1, 100, 300);
-
-
+let animation = anime({
+    targets: animateMe,
+    translateX: 52/0.1,
+    translateY: 50/0.1,
+    scale: 0.1,
+    rotate: '1turn',
+    duration: 8000,
+    delay: anime.stagger(1000),
+    autoplay: false
+  });
