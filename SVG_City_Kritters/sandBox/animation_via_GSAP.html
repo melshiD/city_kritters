@@ -414,7 +414,7 @@
         let element = document.getElementById('complete_composite');
         let animation = anime({
             targets: element,
-            viewBox: '0 2799 700 933',
+            viewBox: '0 3732 700 933',
             duration: 8000,
             easing: 'linear',
             autoplay: false
@@ -422,6 +422,12 @@
         
         // element.addEventListener('click', () => animation.play());
         element.onclick = animation.play;
+        let svgNs = "http://www.w3.org/2000/svg";
+        let newPhoto = document.createElementNS(svgNs, 'use');
+        newPhoto.setAttribute('href', '#composite_3');
+        newPhoto.setAttribute('y', '3732');
+
+        document.getElementById('complete_composite').appendChild(newPhoto);
 
   </script>
 </body>
