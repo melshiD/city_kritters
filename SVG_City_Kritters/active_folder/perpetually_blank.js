@@ -176,16 +176,35 @@ kritter1.createNestingGroupForUseElementAnimation();
 kritter2.createNestingGroupForUseElementAnimation();
 kritter3.createNestingGroupForUseElementAnimation();
 kritter4.createNestingGroupForUseElementAnimation();
+new NewKritter('avalldey').drawNow().varyRender(1, 0.7, 444, 333).createNestingGroupForUseElementAnimation();
+new NewKritter('dpadr').drawNow().varyRender(1, 1, 33, 1111).createNestingGroupForUseElementAnimation();
+new NewKritter('vvdaldley').drawNow().varyRender(2, 3, 530, 233).createNestingGroupForUseElementAnimation();
+new NewKritter('evaldlevy').drawNow().varyRender(2, 2, 2303, 1222).createNestingGroupForUseElementAnimation();
+new NewKritter('wvallddey').drawNow().varyRender(4, 0.7, 4044, 333).createNestingGroupForUseElementAnimation();
+new NewKritter('apar').drawNow().varyRender(1, 1, 33, 1111).createNestingGroupForUseElementAnimation();
+new NewKritter('vdalley').drawNow().varyRender(4, 3, 53, 233).createNestingGroupForUseElementAnimation();
+new NewKritter('bvallevy').drawNow().varyRender(2, 2, 233, 1222).createNestingGroupForUseElementAnimation();
+new NewKritter('tveadllddey').drawNow().varyRender(1.7, 0.7, 4044, 333).createNestingGroupForUseElementAnimation();
+new NewKritter('bbvwadlleddey').drawNow().varyRender(0.5, 0.7, 4044, 333).createNestingGroupForUseElementAnimation();
+new NewKritter('evaldlddey').drawNow().varyRender(0.16, 0.7, 4044, 333).createNestingGroupForUseElementAnimation();
+new NewKritter('rrbvaldlddey').drawNow().varyRender(1, 1, 333, 120).createNestingGroupForUseElementAnimation();
+new NewKritter('brbvaldldacdey').drawNow().varyRender(1, 1, 50, 12).createNestingGroupForUseElementAnimation();
+new NewKritter('valdldacddey').drawNow().varyRender(1, 1, 500, 12).createNestingGroupForUseElementAnimation();
+new NewKritter('valdlacacddey').drawNow().varyRender(1, 1, 130, 120).createNestingGroupForUseElementAnimation();
+new NewKritter('valdaclddey').drawNow().varyRender(1, 1, 190, 120).createNestingGroupForUseElementAnimation();
+new NewKritter('valdeelddey').drawNow().varyRender(1, 1, 0, 120).createNestingGroupForUseElementAnimation();
 
-let animateMe = document.querySelectorAll('[id*="animation"]');
+// let animateMe = document.querySelectorAll('[id*="animation"]');
 
-let animation = anime({
-    targets: animateMe,
-    translateX: 52/0.1,
-    translateY: 50/0.1,
-    scale: 0.1,
-    rotate: '1turn',
-    duration: 8000,
-    delay: anime.stagger(1000),
-    autoplay: false
-  });
+// let animation = anime({
+//     targets: animateMe,
+//     translateX: '200',
+//     translateY: '10000',
+//     scale: 1,
+//     duration: 8000,
+//     delay: anime.stagger(1000),
+//     autoplay: false
+//   });
+
+//   animation.play();
+
