@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stage Setter</title>
+    <title>Tile Traversal animation exeriment 3</title>
     <style>
         .stage {
-            width: 600px;
+            width: 15000;
             border: 4px pink solid;
             border-radius: 2em;
         }
@@ -18,74 +18,107 @@
 <body>
     <svg display="none">
 
-        <symbol id="photo_2">
+        <symbol id="gen_level" width="15120" height="16128">
+            <!-- ESTABLISHING HEIGHT AND WIDTH ON THIS SYMBOL IS KEY TO THIS
+            METHOD ALLOWING ANIMATION FROM ONE IMAGE TO NEXT IN <use> -->
+
+            <!-- OK, this method is even MORE jerkey than method 1 -->
+
             <image height="4032" width="3024" href="../../photos/melsh_2.jpg"></image>
+
+            <image x="3024" height="4032" width="3024" href="../../photos/melsh_3.jpg"></image>
+
+            <image x="6048" height="4032" width="3024" href="../../photos/melsh_4.jpg"></image>
+
+            <image x="6048" y="4032" height="4032" width="3024" href="../../photos/melsh_5.jpg"></image>
+
+            <image x="6048" y="8064" height="4032" width="3024" href="../../photos/melsh_6.jpg"></image>
+
+            <image x="6048" y="12096" height="4032" width="3024" href="../../photos/melsh_7.jpg"></image>
+
+            <image x="9072" y="12096" height="4032" width="3024" href="../../photos/melsh_8.jpg"></image>
+
+            <image x="12096" y="12096" height="4032" width="3024" href="../../photos/melsh_9.jpg"></image>
         </symbol>
 
-        <symbol id="photo_3">
-            <image height="4032" width="3024" href="../../photos/melsh_3.jpg"></image>
-        </symbol>
-
-        <symbol id="photo_4">
-            <image height="4032" width="3024" href="../../photos/melsh_4.jpg"></image>
-        </symbol>
-
-        <symbol id="photo_5">
-            <image height="4032" width="3024" href="../../photos/melsh_5.jpg"></image>
-        </symbol>
-
-        <symbol id="photo_6">
-            <image height="4032" width="3024" href="../../photos/melsh_6.jpg"></image>
-        </symbol>
-
-        <symbol id="photo_7">
-            <image height="4032" width="3024" href="../../photos/melsh_7.jpg"></image>
-        </symbol>
-
-        <symbol id="photo_8">
-            <image height="4032" width="3024" href="../../photos/melsh_8.jpg"></image>
-        </symbol>
-
-        <symbol id="photo_9">
-            <image height="4032" width="3024" href="../../photos/melsh_9.jpg"></image>
-        </symbol>
-
-        <symbol id="main_stage" viewBox="0 0 3024 4032">
-            <!-- THIS IS THE VIEWBOX TO MODIFY TO TRAVERSE BETWEEN PANELS -->
-            <!-- getting rid of all the other symbol viewBox's fixed the issue of
-        not being able to transition between panels while 'zoomed in' -->
-            <use href="#photo_2"></use>
-            <use href="#photo_3" x="3024"></use>
-            <use href="#photo_4" x="6048"></use>
-            <use href="#photo_5" x="6048" y="4032"></use>
-            <use href="#photo_6" x="6048" y="8064"></use>
-            <use href="#photo_7" x="6048" y="12096"></use>
-            <use href="#photo_8" x="9072" y="12096"></use>
-            <use href="#photo_9" x="12096" y="12096"></use>
+        <!-- <symbol id="main_stage" viewBox="0 0 15120 16124"> this one for full view of stage -->
+        <!-- <symbol id="main_stage" viewBox="0 0 3024 4032"> -->
+        <symbol id="main_stage" viewBox="0 0 15120 16124">
+            <use href="#gen_level"></use>
         </symbol>
     </svg>
 
-    <svg class="stage" viewBox="0 0 3024 4032">
+    <svg id="rendered" class="stage" viewBox='0 0 700 933'>
+        <!-- viewBox here really just establishes an aspect ratio -->
         <use href="#main_stage"></use>
     </svg>
+
+
     <script src="../../node_modules/animejs/lib/anime.min.js"></script>
     <script>
-        let tl = anime.timeline({
-            targets: '#main_stage',
-            easing: 'linear'
-        })
+        // let tl = anime.timeline({
+        //     targets: '#main_stage',
+        //     easing: 'cubicBezier(.5, .05, .1, .3)'
+        // })
 
-        tl.add({
-            viewBox: "6048 0 3024 4032",
-            duration: 3000
-        }).add({
-            viewBox: "6048 12096 3024 4032",
-            duration: 4000
+        // tl.add({
+        //     viewBox: "6048 0 3024 4032",
+        //     duration: 6000
+        // }).add({
+        //     viewBox: "6048 12096 3024 4032",
+        //     duration: 8000
 
-        }).add({
-            viewBox: "12096 12096 3024 4032",
-            duration: 3000
-        });
+        // }).add({
+        //     viewBox: "12096 12096 8000 4032",
+        //     duration: 6000
+        // }).pause();
+
+        let svgElement = document.getElementById('rendered');
+        let { width, height } = svgElement.getBBox();
+        console.log(`width: ${width}`);
+
+        let clonedSvgElement = svgElement.cloneNode(true);
+
+        let outerHTML = clonedSvgElement.outerHTML,
+            blob = new Blob([outerHTML], { type: 'image.svg+xml;charset=utf-8' });
+
+        let URL = window.URL || window.webkitURL || window;
+
+        let blobURL = URL.createObjectURL(blob);
+
+        let image = new Image();
+
+        image.onload = () => {
+            let canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            let context = canvas.getContext('2d');
+
+            context.drawImage(image, 0, 0, width, height);
+
+            let png = canvas.toDataURL();
+        let jpeg = canvas.toDataURL('image/jpg');
+        let webp = canvas.toDataURL('image/webp');
+
+            document.body.appendChild(canvas);
+            render(canvas, context);
+
+            downloadImage(canvas);
+        }
+        image.src = blobURL;
+
+
+        let download = function(href, name){
+            let link = document.createElement('a');
+            link.download = name;
+            link.style.opacity = '0';
+            document.append(link);
+            link.href = href;
+            link.click();
+            link.remove();
+        }
+
+
     </script>
 </body>
 
