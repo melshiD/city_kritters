@@ -11,32 +11,56 @@ background images with the timeline (vice tracking viewBox values
 via the timeline) -->
 
 
+<!-- Ok, tried it one more time with WAY smaller files, and it seems
+much more acceptable.  I think this may be ok.  I'm not sure.
+There must be a way to maintain the fidelity without the need
+to bo beyond native browsre support -->
+
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traverse Tiles ANimation with CSS</title>
+    <title>Traverse Tiles Animation with CSS</title>
     <style>
-        img{
+        img {
             width: 700px;
             height: 900px;
         }
-        .big-div-container{
+
+        .big-div-container {
             width: 700px;
             height: 933px;
             overflow: hidden;
         }
-        .big-div{
+
+        .big-div {
             display: grid;
             grid-template-areas: 'a b c .'
                 '. . g .'
                 '. . k l';
             transform: translateX(0);
         }
-        /* div {
-            width: auto;
-            border: 5px red solid;
-        } */
+
+        .img-overlay-wrap,
+        .our-char-wrap {
+            position: relative;
+            display: inline-block;
+            /*shrinks container to image size*/
+        }
+
+        .img-overlay-wrap svg {
+            position: absolute;
+            top: 20px;
+            left: 200px;
+        }
+
+        .our-char-wrap .our-char {
+            position: absolute;
+            top: 100px;
+            left: 500px;
+            /* animate these top/left properties to animate the character! */
+        }
 
         .photo2 {
             grid-area: a;
@@ -65,43 +89,73 @@ via the timeline) -->
 </head>
 
 <body>
+
     <!-- im going to try to put the whole grid into a div and transform to animate through the level -->
- <div class="big-div-container">
-    <div class="big-div">
-        <div class="photo2">
-            <img src="../../photos/melsh_2.jpg" alt="" srcset="">
-        </div>
-        <div class="photo3">
-            <img src="../../photos/melsh_3.jpg" alt="" srcset="">
-        </div>
-        <div class="photo4">
-            <img src="../../photos/melsh_4.jpg" alt="" srcset="">
-        </div>
-        <div class="photo5">
-            <img src="../../photos/melsh_5.jpg" alt="" srcset="">
-        </div>
-        <div class="photo6">
-            <img src="../../photos/melsh_6.jpg" alt="" srcset="">
-        </div>
-        <div class="photo7">
-            <img src="../../photos/melsh_7.jpg" alt="" srcset="">
+    <div class="big-div-container">
+        <div class="our-char-wrap">
+            <div class="big-div">
+                <div class="img-overlay-wrap">
+                    <div class="photo2">
+                        <svg viewBox="0 0 200 200" width="50" height="50" id="svg_link">
+                            <!-- <a href="www.google.com"> -->
+                            <a >
+                                <circle cx="100" cy="100" r="40" fill='#34ff09' stroke="pink" stroke-width="2em" />
+                            </a>
+                        </svg>
+                    </div>
+                </div>
+                <div class="photo3">
+                    <img src="../../photos/700x933.jpg" alt="" srcset="">
+                </div>
+                <div class="photo4">
+                    <img src="../../photos/700x933.jpg" alt="" srcset="">
+                </div>
+                <div class="photo5">
+                    <img src="../../photos/700x933.jpg" alt="" srcset="">
+                </div>
+                <div class="photo6">
+                    <img src="../../photos/700x933.jpg" alt="" srcset="">
+                </div>
+                <div class="photo7">
+                    <img src="../../photos/700x933.jpg" alt="" srcset="">
+                </div>
+            </div>
+            <svg class="our-char" width="50" height="50" viewBox="0 0 250 250" >
+                <circle cx="100" cy="100" r="40" fill='#34ff09' stroke="pink" stroke-width="2em" />
+            </svg>
         </div>
     </div>
-</div>
-<script src="../../node_modules/animejs/lib/anime.min.js" ></script>
-<script>
-    let tl = anime.timeline({
-        easing: 'linear',
-        duration: 5000
-    });
-    tl.add({
-        targets: '.big-div',
-        translateX: -1400
-    }).add({
-        targets: '.big-div',
-        translateY: -1866
-    }).play();
-</script>
+    <script src="../../node_modules/animejs/lib/anime.min.js"></script>
+    <script>
+        let tl = anime.timeline({
+            easing: 'linear',
+            duration: 5000,
+            autoplay: false
+        });
+        tl.add({
+            targets: '.big-div',
+            translateX: -1400
+        }).add({
+            targets: '.big-div',
+            translateY: -1866
+        }).add({
+            targets: '.our-char',
+            left: -200,
+            top: 200,
+        });;
+
+        let tl_2 = anime({
+            targets: '.our-char', 
+            duration: 7000,
+            scale: 3,
+            translateY: 40,
+            autoplay: false
+        });
+
+        document.querySelector('.our-char').onclick = tl_2.restart;
+        document.querySelector('#svg_link').onclick = tl.restart;
+
+    </script>
 </body>
 
 </html>
