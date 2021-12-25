@@ -96,11 +96,9 @@ to bo beyond native browsre support -->
             <div class="big-div">
                 <div class="img-overlay-wrap">
                     <div class="photo2">
-                        <svg viewBox="0 0 200 200" width="50" height="50" id="svg_link">
-                            <!-- <a href="www.google.com"> -->
-                            <a >
+                        <img src="../../photos/700x933.jpg" alt="" srcset="">
+                        <svg id="svg_button" viewBox="0 0 200 200" width="50" height="50">
                                 <circle cx="100" cy="100" r="40" fill='#34ff09' stroke="pink" stroke-width="2em" />
-                            </a>
                         </svg>
                     </div>
                 </div>
@@ -142,19 +140,18 @@ to bo beyond native browsre support -->
             targets: '.our-char',
             left: -200,
             top: 200,
-        });;
+        });
 
         let tl_2 = anime({
             targets: '.our-char', 
             duration: 7000,
-            scale: 3,
+            scale: 13,
             translateY: 40,
             autoplay: false
         });
 
         document.querySelector('.our-char').onclick = tl_2.restart;
-        document.querySelector('#svg_link').onclick = tl.restart;
-
+        document.querySelector('#svg_button').onclick = tl.restart;
     </script>
 </body>
 
