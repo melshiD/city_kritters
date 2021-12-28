@@ -30,9 +30,13 @@ to bo beyond native browsre support -->
         }
 
         .big-div-container {
-            width: 700px;
-            height: 933px;
+            /* width: 700px;
+            height: 933px; */
+            max-width: 700px;
+            max-height: 933px;
             overflow: hidden;
+            margin: 0 auto;
+
         }
 
         .big-div {
@@ -58,8 +62,8 @@ to bo beyond native browsre support -->
 
         .our-char-wrap .our-char {
             position: absolute;
-            top: 100px;
-            left: 300px;
+            top: -200px;
+            left: 200px;
             /* animate these top/left properties to animate the character! */
         }
 
@@ -171,6 +175,11 @@ to bo beyond native browsre support -->
             autoplay: false
         });
         tl.add({
+            targets: '.our-char',
+            left: 300,
+            top: 100
+        }).add({
+            easing: 'cubicBezier(.5, .05, .1, .3)',
             targets: '.big-div',
             translateX: -1400
         }).add({
@@ -179,7 +188,7 @@ to bo beyond native browsre support -->
         }).add({
             targets: '.our-char',
             left: -200,
-            top: 200,
+            top: 200
         });
 
         let tl_2 = anime({
