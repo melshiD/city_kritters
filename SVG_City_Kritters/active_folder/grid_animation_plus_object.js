@@ -3,7 +3,7 @@ function NewKritter(name = "Finga Prin") {
     this.name = name;
     this.colorArray = createColorArray(name);
     this.newSymbol = generateNewSymbol(this.colorArray);
-    this.useElement = generateUseElement(this.newSymbol);
+    this.useElement = generateUseElement(this);
     this.varyRender = (scale1 = 1, scale2 = 1, x = 0, y = 0) => {
         this.useElement.setAttribute('transform', `scale(${scale1}, ${scale2})`);
         this.useElement.setAttribute('x', `${x/scale1}px`);
@@ -61,12 +61,14 @@ function NewKritter(name = "Finga Prin") {
         return colorArray;
     }
 
+    // function generateUseElement(newSym){
     function generateUseElement(newSym){
-        let useElementId = `use_element`;
+        let useElementId = `${newSym.name}_use_element`;
         let svgNs = 'http://www.w3.org/2000/svg';
-        let useId = `#${newSym.id}`;
+        let useHref = `#${newSym.newSymbol.id}`;
         let useElem = document.createElementNS(svgNs, 'use');
-        useElem.setAttribute('href', useId);
+        useElem.setAttribute('href', useHref);
+        useElem.setAttribute('id', `${useElementId}`);
         console.log(useElem);
         return useElem;
     }

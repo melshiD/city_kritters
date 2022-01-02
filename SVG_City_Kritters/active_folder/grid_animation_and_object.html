@@ -59,6 +59,10 @@ to bo beyond native browsre support -->
             top: 20px;
             left: 200px;
         }
+        #circle_button{
+            /* position: absolute; */
+            z-index: 2;
+        }
 
         .our-char-wrap .our-char {
             position: absolute;
@@ -90,7 +94,19 @@ to bo beyond native browsre support -->
         .photo7 {
             grid-area: l;
         }
-    </style>
+        /* styles for the svg added by the NewKritter object  */
+        #use_box{
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            z-index: 1;
+            transform: scale(0.3);
+        }
+        [id*="_whole_figure"]{
+            position: absolute;
+            z-index: 1;
+        }
+</style>
 </head>
 
 <body>
@@ -185,7 +201,6 @@ to bo beyond native browsre support -->
                         transform="translate(-126.02 -178.76)" />
                 </g>
             </g>
-
         </symbol>
     </svg>
 
@@ -217,7 +232,7 @@ to bo beyond native browsre support -->
                     <img src="../../photos/city_6.jpg" alt="" srcset="">
                 </div>
             </div>
-            <svg id="use_box">
+            <svg id="use_box" width="400px" viewBox="0 0 360 560">
 
             </svg>
 
@@ -228,28 +243,37 @@ to bo beyond native browsre support -->
     <script>
         let tl = anime.timeline({
             easing: 'linear',
-            duration: 5000,
             autoplay: false
-        });
-        tl.add({
-            targets: '#use_element',
+        }).add({
+            targets: '#mary_use_element',
+            duration: 1000,
             left: 300,
             top: 100
         }).add({
-            easing: 'cubicBezier(.5, .05, .1, .3)',
             targets: '.big-div',
+            duration: 1000,
             translateX: -1400
         }).add({
             targets: '.big-div',
+            duration: 1000,
             translateY: -1866
         }).add({
-            targets: '#use_element',
+            targets: '.big-div',
+            duration: 1000,
+            translateX: 0
+        }).add({
+            targets: '.big-div',
+            duration: 1000,
+            translateY: 0
+        }).add({
+            targets: '#mary_use_element',
+            duration: 1000,
             left: -200,
             top: 200
         });
 
         let tl_2 = anime({
-            targets: '#use_element', 
+            targets: '#mary_use_element', 
             duration: 7000,
             scale: 1.3,
             translateY: 40,
@@ -257,13 +281,28 @@ to bo beyond native browsre support -->
             direction: 'alternate',
             loop: true
         });
-        document.querySelector('[id*="whole_figure"]').onclick = tl_2.restart;
-        document.querySelector('#circle_button').onclick = tl.restart;
+
+        // let circleButton = document.getElementById('circle_button');
+        // circleButton.addEventListener('mouseenter', () => {
+        //     circleButton.addEventListener('click', () =>{
+        //         tl.restart();
+        //     })
+        // });
         //link to preview:
         //http://htmlpreview.github.io/?https://github.com/melshiD/city_kritters/blob/main/SVG_City_Kritters/sandBox/grid_and_images_not_the_stage_solution.html
         //make function to animate a bounce back into the bounds of the image
     </script>
     <script src="grid_animation_plus_object.js"></script>
+    <script>
+        let mary = new NewKritter('mary');
+        mary.drawNow();
+        // mary.varyRender(0.4, 0.4, 100, 100);
+        document.querySelector('#circle_button').onclick = tl.restart;
+        document.querySelector('[id*="_use_element"]').onclick = tl_2.restart;
+
+
+
+    </script>
 </body>
 
 </html>
