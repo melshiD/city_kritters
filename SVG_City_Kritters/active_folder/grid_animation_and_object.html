@@ -97,10 +97,12 @@ to bo beyond native browsre support -->
         /* styles for the svg added by the NewKritter object  */
         #use_box{
             position: absolute;
-            top: 100px;
-            left: 100px;
+            top: 400px;
+            left: -400px;
             z-index: 1;
-            transform: scale(0.3);
+            width: 9em;
+            opacity: 0;
+            /* animate width to move character around in this design  */
         }
         [id*="_whole_figure"]{
             position: absolute;
@@ -240,16 +242,31 @@ to bo beyond native browsre support -->
         </div>
     </div>
     <script src="../../node_modules/animejs/lib/anime.min.js"></script>
+    <script src="grid_animation_plus_object.js"></script>
     <script>
+    let mary = new NewKritter('mary');
+    mary.drawNow();
+    </script>
+    <script>
+        let animateTarget = '#use_box';
         let tl = anime.timeline({
             easing: 'linear',
             autoplay: false
         }).add({
-            targets: '#mary_use_element',
+            targets: animateTarget,
+            duration: 1,
+            scale: 30
+        }).add({
+            targets: animateTarget,
             duration: 1000,
             left: 300,
-            top: 100
+            top: 100,
+            opacity: 1
         }).add({
+            targets: animateTarget,
+            duration: 1000,
+            scale: 1
+        },'-=1000').add({
             targets: '.big-div',
             duration: 1000,
             translateX: -1400
@@ -266,14 +283,14 @@ to bo beyond native browsre support -->
             duration: 1000,
             translateY: 0
         }).add({
-            targets: '#mary_use_element',
+            targets: animateTarget,
             duration: 1000,
             left: -200,
             top: 200
         });
 
         let tl_2 = anime({
-            targets: '#mary_use_element', 
+            targets: animateTarget, 
             duration: 7000,
             scale: 1.3,
             translateY: 40,
@@ -292,13 +309,11 @@ to bo beyond native browsre support -->
         //http://htmlpreview.github.io/?https://github.com/melshiD/city_kritters/blob/main/SVG_City_Kritters/sandBox/grid_and_images_not_the_stage_solution.html
         //make function to animate a bounce back into the bounds of the image
     </script>
-    <script src="grid_animation_plus_object.js"></script>
     <script>
-        let mary = new NewKritter('mary');
-        mary.drawNow();
         // mary.varyRender(0.4, 0.4, 100, 100);
         document.querySelector('#circle_button').onclick = tl.restart;
-        document.querySelector('[id*="_use_element"]').onclick = tl_2.restart;
+        // document.querySelector('[id*="_use_element"]').onclick = tl_2.restart;
+        document.querySelector('#use_box').onclick = tl_2.restart;
 
 
 
