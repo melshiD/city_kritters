@@ -24,7 +24,6 @@
 
         #use_box {
             position: absolute;
-
             left: 10px;
         }
     </style>
@@ -134,10 +133,9 @@
     <script>
         let mary = new NewKritter('mary');
         mary.drawNow();
-        // mary.useElement.style = 'transform: scale(.5, .5)';
-        // mary.useElement.setAttribute('x', '200');
-
-
+        
+        let transScale = .5;
+        mary.useElement.style = `transform: scale(${transScale}, ${transScale})`;
         let maryUseElem = document.getElementById('mary_use_element');
         let hovering = false,
             clicking = false;
@@ -150,7 +148,7 @@
         // maryUseElem.addEventListener('mouseleave', (e) => {
         //     hovering = false;
         // });
-        let critterX = maryUseElem.getBoundingClientRect().left - 330,
+        let critterX = maryUseElem.getBoundingClientRect().left,
             critterY = maryUseElem.getBoundingClientRect().top,
             newStartingX = 0,
             newStartingY = 0;
@@ -164,7 +162,7 @@
         });
         maryUseElem.addEventListener('mouseup', (e) => {
             clicking = false;
-            critterX = maryUseElem.getBoundingClientRect().left - 330;
+            critterX = maryUseElem.getBoundingClientRect().left;
             critterY = maryUseElem.getBoundingClientRect().top;
         });
         maryUseElem.addEventListener('mouseleave', (e) => {
@@ -173,11 +171,15 @@
         });
         maryUseElem.addEventListener('mousemove', (e) => {
             if(clicking === true){
-                maryUseElem.setAttribute('x', `${critterX + (e.offsetX - newStartingX)}`);
-                maryUseElem.setAttribute('y', `${critterY + (e.offsetY - newStartingY)}`);
+                maryUseElem.setAttribute('x', `${critterX + (e.offsetX - newStartingX)/transScale}`);
+                maryUseElem.setAttribute('y', `${critterY + (e.offsetY - newStartingY)/transScale}`);
             }
             console.log(`x: ${e.offsetX}, y: ${e.offsetY}`);
             console.log(`${critterY + (e.offsetY - newStartingY)}`);
+            console.log(maryUseElem.getBoundingClientRect().x);
+            console.log(maryUseElem.getBoundingClientRect().left);
+            console.log(maryUseElem.getBoundingClientRect().top);
+            console.log(maryUseElem.getBoundingClientRect().y);
         });
 
 
