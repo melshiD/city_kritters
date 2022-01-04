@@ -69,6 +69,7 @@ function NewKritter(name = "Finga Prin") {
         let useElem = document.createElementNS(svgNs, 'use');
         useElem.setAttribute('href', useHref);
         useElem.setAttribute('id', `${useElementId}`);
+        useElem.setAttribute('transform-origin', `200`);
         console.log(useElem);
         return useElem;
     }
