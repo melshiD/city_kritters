@@ -7,11 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card Riff 1</title>
     <style>
+
         .background {
-            height: 700px;
-            width: fit-content;
+            height: 933px;
+            width: 700px;
             margin: auto;
             position: relative;
+            /* display: inline-block; */
+            background-image: url('../../photos/city_3.jpg');
+            background-repeat: no-repeat;
         }
 
         .background img {
@@ -20,6 +24,7 @@
 
         #use_box {
             position: absolute;
+
             left: 10px;
         }
     </style>
@@ -120,8 +125,7 @@
         </symbol>
     </svg>
     <div class="background">
-        <img src="../../photos/city_4.jpg" alt="" srcset="">
-        <svg id="use_box" viewBox="0 0 1200 2100">
+        <svg id="use_box" viewBox="0 0 700 933">
 
         </svg>
     </div>
@@ -130,12 +134,14 @@
     <script>
         let mary = new NewKritter('mary');
         mary.drawNow();
-        mary.useElement.style = 'transform: scale(-1, 1)';
+        // mary.useElement.style = 'transform: scale(.5, .5)';
+        // mary.useElement.setAttribute('x', '200');
 
 
         let maryUseElem = document.getElementById('mary_use_element');
         let hovering = false,
             clicking = false;
+        let marySymbol = document.getElementById('mary_whole_figure');
         
 
         // maryUseElem.addEventListener('mouseenter', (e) => {
@@ -144,14 +150,36 @@
         // maryUseElem.addEventListener('mouseleave', (e) => {
         //     hovering = false;
         // });
+        let critterX = maryUseElem.getBoundingClientRect().left - 330,
+            critterY = maryUseElem.getBoundingClientRect().top,
+            newStartingX = 0,
+            newStartingY = 0;
+            
+
         maryUseElem.addEventListener('mousedown', (e) => {
+            newStartingX = e.offsetX;
+            newStartingY = e.offsetY;
             clicking = true;
-            console.log(clicking);
+
         });
         maryUseElem.addEventListener('mouseup', (e) => {
             clicking = false;
-            console.log(clicking);
+            critterX = maryUseElem.getBoundingClientRect().left - 330;
+            critterY = maryUseElem.getBoundingClientRect().top;
         });
+        maryUseElem.addEventListener('mouseleave', (e) => {
+            clicking = false;
+            console.log('leaving');
+        });
+        maryUseElem.addEventListener('mousemove', (e) => {
+            if(clicking === true){
+                maryUseElem.setAttribute('x', `${critterX + (e.offsetX - newStartingX)}`);
+                maryUseElem.setAttribute('y', `${critterY + (e.offsetY - newStartingY)}`);
+            }
+            console.log(`x: ${e.offsetX}, y: ${e.offsetY}`);
+            console.log(`${critterY + (e.offsetY - newStartingY)}`);
+        });
+
 
 
     </script>
