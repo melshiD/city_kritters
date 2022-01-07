@@ -134,8 +134,11 @@
         let mary = new NewKritter('mary');
         mary.drawNow();
         
-        let transScale = .5;
-        mary.useElement.style = `transform: scale(${transScale}, ${transScale})`;
+        let scaleKritter = (scale = 0.5) =>{
+            mary.useElement.style = `transform: scale(${scale}, ${scale})`;
+            return scale;
+        };
+        let transScale = scaleKritter(0.5);
         let maryUseElem = document.getElementById('mary_use_element');
         let hovering = false,
             clicking = false;
@@ -171,15 +174,13 @@
         });
         maryUseElem.addEventListener('mousemove', (e) => {
             if(clicking === true){
-                maryUseElem.setAttribute('x', `${critterX + (e.offsetX - newStartingX)/transScale}`);
+                maryUseElem.setAttribute('x', `${critterX + Math.floor((e.offsetX - newStartingX)/transScale)}`);
                 maryUseElem.setAttribute('y', `${critterY + (e.offsetY - newStartingY)/transScale}`);
             }
             console.log(`x: ${e.offsetX}, y: ${e.offsetY}`);
             console.log(`${critterY + (e.offsetY - newStartingY)}`);
-            console.log(maryUseElem.getBoundingClientRect().x);
             console.log(maryUseElem.getBoundingClientRect().left);
             console.log(maryUseElem.getBoundingClientRect().top);
-            console.log(maryUseElem.getBoundingClientRect().y);
         });
 
 
