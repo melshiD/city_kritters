@@ -24,7 +24,7 @@
 
         #use_box {
             position: absolute;
-            left: 10px;
+            /* left: 10px; */
         }
     </style>
 </head>
@@ -138,7 +138,7 @@
             mary.useElement.style = `transform: scale(${scale}, ${scale})`;
             return scale;
         };
-        let transScale = scaleKritter(0.5);
+        let transScale = scaleKritter();
         let maryUseElem = document.getElementById('mary_use_element');
         let hovering = false,
             clicking = false;
@@ -174,8 +174,8 @@
         });
         maryUseElem.addEventListener('mousemove', (e) => {
             if(clicking === true){
-                maryUseElem.setAttribute('x', `${critterX + Math.floor((e.offsetX - newStartingX)/transScale)}`);
-                maryUseElem.setAttribute('y', `${critterY + (e.offsetY - newStartingY)/transScale}`);
+                maryUseElem.setAttribute('x', `${critterX/transScale + Math.floor((e.offsetX - newStartingX)/transScale)}`);
+                maryUseElem.setAttribute('y', `${critterY/transScale + Math.floor((e.offsetY - newStartingY)/transScale)}`);
             }
             console.log(`x: ${e.offsetX}, y: ${e.offsetY}`);
             console.log(`${critterY + (e.offsetY - newStartingY)}`);
