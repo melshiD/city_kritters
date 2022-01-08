@@ -36,6 +36,9 @@
 </head>
 
 <body>
+    <button type="button" onclick="addPosition">
+        Add animation tween
+    </button>
     <svg id="main_svg" display="none">
         <symbol stroke='black' id="whole_figure">
             <g id="whole_figure_group">
@@ -137,7 +140,6 @@
     </div>
     <div class="slider">
         <input id="scale_slider" type="range" min="0.1" max="1" step="0.02" onchange="scaleMe(this)">
-
     </div>
 </div>
     <script src="grid_animation_plus_object.js"></script>
@@ -154,23 +156,17 @@
             }
             return scale;
         };
-        let transScale = scaleKritter(1);
-        let maryUseElem = document.getElementById('mary_use_element');
-        let hovering = false,
-            clicking = false;
-        let marySymbol = document.getElementById('mary_whole_figure');
+        let transScale = scaleKritter(0.5),
+            maryUseElem = document.getElementById('mary_use_element'),
+            hovering = false,
+            clicking = false,
+            marySymbol = document.getElementById('mary_whole_figure');
         
-
-        // maryUseElem.addEventListener('mouseenter', (e) => {
-        //     hovering = true;
-        // });
-        // maryUseElem.addEventListener('mouseleave', (e) => {
-        //     hovering = false;
-        // });
         let critterX = maryUseElem.getBoundingClientRect().left,
             critterY = maryUseElem.getBoundingClientRect().top,
             newStartingX = 0,
-            newStartingY = 0;
+            newStartingY = 0,
+            tweenCapture = [];
             
 
         maryUseElem.addEventListener('mousedown', (e) => {
@@ -205,6 +201,9 @@
             transScale = e.value;
         }
 
+        function addPosition(){
+
+        }
 
     </script>
 </body>
