@@ -146,17 +146,19 @@
     <script>
         let mary = new NewKritter('mary');
         mary.drawNow();
+        let flipMe = false;
         
         let scaleKritter = (scale = 0.5, flip = false) =>{
             flipMe = (flip===true) ? (-Math.abs(scale)):scale;
             mary.useElement.style = `transform: scale(${flipMe}, ${scale})`;
             if(flip === true){
                 mary.useElement.setAttribute('transform-origin', `230`);
-                mary.useElement.setAttribute('viewBox', '0 0 700 933')
+                // mary.useElement.setAttribute('viewBox', '0 0 700 933')
             }
             return scale;
         };
-        let transScale = scaleKritter(0.5),
+
+        let transScale = scaleKritter(0.5, true),
             maryUseElem = document.getElementById('mary_use_element'),
             hovering = false,
             clicking = false,
@@ -186,7 +188,9 @@
         });
         maryUseElem.addEventListener('mousemove', (e) => {
             if(clicking === true){
-                maryUseElem.setAttribute('x', `${critterX/transScale + Math.floor((e.offsetX - newStartingX)/transScale)}`);
+                let flipped = flipMe == true?1:-1;
+                console.log("flipped is " + flipped);
+                maryUseElem.setAttribute('x', `${(critterX/transScale + Math.floor((e.offsetX - newStartingX)/transScale))*flipped}`);
                 maryUseElem.setAttribute('y', `${critterY/transScale + Math.floor((e.offsetY - newStartingY)/transScale)}`);
             }
             console.log(`x: ${e.offsetX}, y: ${e.offsetY}`);
@@ -203,6 +207,7 @@
 
         function addPosition(){
 
+                
         }
 
     </script>
