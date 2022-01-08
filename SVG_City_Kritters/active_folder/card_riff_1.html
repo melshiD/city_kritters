@@ -36,9 +36,6 @@
 </head>
 
 <body>
-    <button type="button" onclick="addPosition">
-        Add animation tween
-    </button>
     <svg id="main_svg" display="none">
         <symbol stroke='black' id="whole_figure">
             <g id="whole_figure_group">
@@ -132,6 +129,9 @@
             </g>
         </symbol>
     </svg>
+    <button type="button" onclick="addPosition()">
+        Add animation tween
+    </button>
     <div class="container">
     <div class="background">
         <svg id="use_box" viewBox="0 0 700 933">
@@ -158,7 +158,7 @@
             return scale;
         };
 
-        let transScale = scaleKritter(0.5, true),
+        let transScale = scaleKritter(0.5),
             maryUseElem = document.getElementById('mary_use_element'),
             hovering = false,
             clicking = false,
@@ -190,7 +190,8 @@
             if(clicking === true){
                 let flipped = flipMe == true?1:-1;
                 console.log("flipped is " + flipped);
-                maryUseElem.setAttribute('x', `${(critterX/transScale + Math.floor((e.offsetX - newStartingX)/transScale))*flipped}`);
+                // maryUseElem.setAttribute('x', `${(critterX/transScale + Math.floor((e.offsetX - newStartingX)/transScale))*flipped}`);
+                maryUseElem.setAttribute('x', `${critterX/transScale + Math.floor((e.offsetX - newStartingX)/transScale)}`);
                 maryUseElem.setAttribute('y', `${critterY/transScale + Math.floor((e.offsetY - newStartingY)/transScale)}`);
             }
             console.log(`x: ${e.offsetX}, y: ${e.offsetY}`);
@@ -200,13 +201,16 @@
         });
 
         function scaleMe(e){
-            mary.useElement.style = `transform: scale(${e.value}, ${e.value})`;
+            let flipped = flipMe == true?1:-1;
+            mary.useElement.style = `transform: scale(${(e.value)*flipped}, ${e.value})`;
             scaleKritter(e.value);
             transScale = e.value;
         }
 
         function addPosition(){
-
+            let posVals = {x: critterX, y: critterY};
+            tweenCapture.push(posVals);
+            console.log(tweenCapture);
                 
         }
 
