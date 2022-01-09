@@ -222,10 +222,12 @@
 
         function genAndAddTimelineEvent(posVals){
             let {x, y} = posVals;
+            let scale = 
             tl.add({
                 targets: maryUseElem,
                 x: x,
                 y: y,
+                scale: transScale,
                 duration: 1000,
                 autoplay: false
             }).pause();
