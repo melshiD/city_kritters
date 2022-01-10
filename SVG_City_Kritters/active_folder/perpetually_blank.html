@@ -8,8 +8,16 @@
     <title>Refactor Kritter Object</title>
     <style>
         svg {
-            /* width: 400px; */
             transform-origin: 400px;
+        }
+        .container{
+            background: url('../../photos/city_6.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 700px;
+            height: 933px;
+            /* position: relative;
+            display: inline-block; */
         }
     </style>
 </head>
@@ -93,20 +101,62 @@
         </symbol>
     </svg>
 <div class="container">
-    <svg id="use_box" width="700px" viewBox="-100 -400 2500 2000"></svg>
+    <svg id="use_box" width="700px" height="933px" viewBox="0 0 700 933"></svg>
 </div>
 <script src="perpetually_blank.js"></script>
 <script>
-    // let fingarin = new NewKritter('fingarin');
-    // fingarin.drawNow();
-    // let useElement = document.getElementById('fingarin_use_element');
-    // //maybe do add/remove classes to filp the thing around?
-    // let wholeFig = document.getElementById('fingarin_whole_figure');
-    // useElement.style.transformOrigin = '150px';//seems to need to be set on the use element and not the symbol to be effective
-    // useElement.style.transform = "scale(-1, 1)";
+    let fingarin = new NewKritter('fingarin');
+    fingarin.drawNow();
+    let useElement = document.getElementById('fingarin_use_element');
+    //maybe do add/remove classes to filp the thing around?
+    let wholeFig = document.getElementById('fingarin_whole_figure');
+    useElement.style.transformOrigin = '150px';//seems to need to be set on the use element and not the symbol to be effective
+    useElement.style.transform = "scale(-.5, .5)";
 
-    // let parkey = new NewKritter('parkey');
-    // parkey.drawNow();
+    let parkey = new NewKritter('parkey');
+    parkey.drawNow();
+    parkey.useElement.style.transformOrigin = '150px';
+    parkey.useElement.style.transform = 'scale(.5, .5)';
+    parkey.useElement.style.x = '230px';
+
+    let hovering = false,
+        dragging = false,
+        mostRecentX = 0,
+        mostRecentY = 0;
+
+    parkey.useElement.addEventListener('mouseover', (e) =>{
+        hovering = true;
+        console.log('hovering: ' + hovering);
+    });
+    parkey.useElement.addEventListener('mouseleave', (e) =>{
+        hovering = false;
+        dragging = false;
+        console.log('hovering: ' + hovering);
+        console.log('dragging: ' + dragging);
+
+    });
+    parkey.useElement.addEventListener('mousedown', (e)=>{
+        mostRecentX = e.offsetX;
+        mostRecentY = e.offsetY;
+        dragging = true;
+        console.log('dragging: ' + dragging);
+    });
+    parkey.useElement.addEventListener('mouseup', ()=>{
+        dragging = false;
+        console.log('dragging :' + dragging);
+    });
+    parkey.useElement.addEventListener('mousemove', (e) =>{
+        if(hovering === true && dragging === true){
+            if(mostRecentX != e.offsetX){
+            parkey.useElement.style.x = parkey.useElement.getBoundingClientRect().x + ((e.offsetX-mostRecentX)) + "px";
+            }
+            if(mostRecentY != e.offsetY){
+            parkey.useElement.style.y = parkey.useElement.getBoundingClientRect().y + ((e.offsetY-mostRecentY)) + "px";
+            }
+        }
+        console.log(parkey.useElement.getBoundingClientRect().x)
+    });
+
 
 
 </script>
