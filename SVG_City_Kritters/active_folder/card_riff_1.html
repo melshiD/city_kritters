@@ -151,6 +151,7 @@
     <script src="../../node_modules/animejs/lib/anime.min.js" ></script>
     <script src="grid_animation_plus_object.js"></script>
     <script>
+        //refactor with better state management for all animatable parameters
         let mary = new NewKritter('mary');
         mary.drawNow();
         let flipMe = false;
@@ -228,8 +229,8 @@
             let scale = 
             tl.add({
                 targets: maryUseElem,
-                x: x,
-                y: y,
+                x: x/transScale,
+                y: y/transScale,
                 scale: transScale,
                 duration: 1000,
                 autoplay: false
