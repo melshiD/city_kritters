@@ -137,16 +137,29 @@
         //this will append the input elements that actually output values for our rects
         document.getElementById('use_box').insertAdjacentElement('afterend', parkey.rectBuddy);
 
+        pue.addEventListener('mouseenter', ()=>{
+            hovering = true;
+            console.log(hovering);
+        });
+        pue.addEventListener('mouseleave', ()=>{
+            hovering = false;
+            console.log(hovering);
+
+        });
+
         pue.onmousedown = function (e) {
             //get offset of cursor from left edge of box
+            dragging = true;
             if(hovering === true){
-                cursorOnCharX = (e.offsetX - pue.getBoundingClientRect().x)/scaleFactor;
-                cursorOnCharY = (e.offsetY - pue.getBoundingClientRect().y)/scaleFactor;
+                cursorOnCharX = (e.offsetX - pue.getBBox().x)/scaleFactor;
+                cursorOnCharY = (e.offsetY - pue.getBBox().y)/scaleFactor;
+                // cursorOnCharX = (e.offsetX - pue.getBoundingClientRect().x)/scaleFactor;
+                // cursorOnCharY = (e.offsetY - pue.getBoundingClientRect().y)/scaleFactor;
             }
 
             function onMouseMove(e) {
-                parkey.resetViewbox(`${-(e.offsetX - cursorOnCharX)/scaleFactor} 
-                                     ${-(e.offsetY - cursorOnCharY)/scaleFactor} 
+                parkey.resetViewbox(`${-(e.offsetX/scaleFactor - cursorOnCharX)} 
+                                     ${-(e.offsetY/scaleFactor - cursorOnCharY)} 
                                      ${700/scaleFactor} 
                                      ${933/scaleFactor}`);
                 console.log(`cursorOnCharX is ${cursorOnCharX}`);
@@ -163,6 +176,7 @@
             pue.onmouseup = function () {
                 pue.removeEventListener('mousemove', onMouseMove);
                 pue.onmouseup = null;
+                dragging = false;
                 console.log("IN ON MOUSE UP");
             }
 
