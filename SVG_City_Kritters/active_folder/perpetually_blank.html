@@ -24,6 +24,13 @@
         use {
             position: absolute;
         }
+        #cord_displays{
+            height: 3em;
+            position: absolute;
+            left: 200px;
+            top: 100px;
+            border: solid rebeccapurple 5px;
+        }
     </style>
 </head>
 
@@ -111,17 +118,22 @@
     <script src="perpetually_blank.js"></script>
     <script>
         let fingarin = new NewKritter('fingarin');
+        
         fingarin.drawNow();
+
+        let scaleFactor = 0.6;
+
         let useElement = document.getElementById('fingarin_use_element');
         //maybe do add/remove classes to filp the thing around?
         let wholeFig = document.getElementById('fingarin_whole_figure');
         useElement.style.transformOrigin = '150px';//seems to need to be set on the use element and not the symbol to be effective
-        useElement.style.transform = "scale(-.5, .5)";
+        useElement.style.transform = `scale(${-scaleFactor}, ${scaleFactor})`;
 
         let parkey = new NewKritter('parkey');
         parkey.drawNow();
         parkey.useElement.style.transformOrigin = '150px';
-        parkey.useElement.style.transform = 'scale(.5, .5)';
+        parkey.useElement.style.transform = `scale(${scaleFactor}, ${scaleFactor})`;
+
         parkey.useElement.style.x = '230px';
 
         let hovering = false,
@@ -130,14 +142,15 @@
             mostRecentY = 0;
 
         let pue = parkey.useElement;
-        pue.append(parkey.rectBuddy);
+
+        document.getElementById('use_box').insertAdjacentElement('afterend', parkey.rectBuddy);
+
         pue.onmousedown = function (e) {
             console.log('its working kinda so far');
 
             //get offset of cursor from left edge of box
             let cursorOnCharX = e.offsetX - pue.getBoundingClientRect().x;
             console.log(cursorOnCharX);
-
 
             // function moveAt(pageX, pageY) {
             //     pue.style.left = pageX - pue.offsetWidth / 2 + 'px';
@@ -147,8 +160,10 @@
             // moveAt(e.pageX, e.pageY);
 
             function onMouseMove(e) {
-                pue.style.x = e.offsetX/.5 - cursorOnCharX/0.5;
+                pue.style.x = e.offsetX/scaleFactor - cursorOnCharX/scaleFactor;
                 console.log(`cursorOnCharX is ${cursorOnCharX}`);
+                document.getElementById('rectX').setAttribute('value', pue.getBoundingClientRect().x);
+                document.getElementById('offsetX').setAttribute('value', e.offsetX);
             }
 
             //set pue's x property to x.offset - cursorOnCharX
@@ -157,6 +172,7 @@
             pue.onmouseup = function () {
                 pue.removeEventListener('mousemove', onMouseMove);
                 pue.onmouseup = null;
+                console.log("IN ON MOUSE UP");
             }
 
             // pue.ondragstart = function () {

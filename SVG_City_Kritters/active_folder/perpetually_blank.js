@@ -76,11 +76,31 @@ function NewKritter(name = "Finga Prin") {
     }
 
     function generateRectBuddy(element){
+        let displayDiv = document.createElement('div');
+        displayDiv.setAttribute('id', 'cord_displays');
+
+        let label1 = document.createElement('label');
+        label1.setAttribute('for', 'rectX');
+        label1.innerHTML = 'rectX: ';
+
         let display1 = document.createElement('input');
         display1.setAttribute('type', 'number');
         display1.setAttribute('id', 'rectX');
-        display1.setAttribute('value', element.getBoundingClientRect().x);
-        return display1;
+
+        let label2 = document.createElement('label');
+        label2.setAttribute('for', 'offsetX');
+        label2.innerHTML = 'offsetX: ';
+
+        let display2 = document.createElement('input');
+        display2.setAttribute('type', 'number');
+        display2.setAttribute('id', 'offsetX');
+
+        displayDiv.appendChild(label1);
+        displayDiv.appendChild(display1);
+        displayDiv.appendChild(label2);
+        displayDiv.appendChild(display2);
+
+        return displayDiv;
     }
 
     function sha256(ascii) {
