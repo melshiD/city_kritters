@@ -121,7 +121,7 @@
         
         fingarin.drawNow();
 
-        let scaleFactor = 0.6;
+        let scaleFactor = .46;
 
         let useElement = document.getElementById('fingarin_use_element');
         //maybe do add/remove classes to filp the thing around?
@@ -149,18 +149,15 @@
             console.log('its working kinda so far');
 
             //get offset of cursor from left edge of box
-            let cursorOnCharX = e.offsetX - pue.getBoundingClientRect().x;
+            let cursorOnCharX = (e.offsetX - pue.getBoundingClientRect().x)/scaleFactor;
+            let cursorOnCharY = (e.offsetY - pue.getBoundingClientRect().y)/scaleFactor;
+            // let cursorOnCharX = e.offsetX/scaleFactor - pue.getBoundingClientRect().x/scaleFactor;
+            // let cursorOnCharY = e.offsetY/scaleFactor - pue.getBoundingClientRect().y/scaleFactor;
             console.log(cursorOnCharX);
 
-            // function moveAt(pageX, pageY) {
-            //     pue.style.left = pageX - pue.offsetWidth / 2 + 'px';
-            //     pue.style.top = pageY - pue.offsetHeight / 2 + 'px';
-            // }
-
-            // moveAt(e.pageX, e.pageY);
-
             function onMouseMove(e) {
-                pue.style.x = e.offsetX/scaleFactor - cursorOnCharX/scaleFactor;
+                pue.style.x = (e.offsetX - cursorOnCharX)/scaleFactor;
+                pue.style.y = (e.offsetY - cursorOnCharY)/scaleFactor;
                 console.log(`cursorOnCharX is ${cursorOnCharX}`);
                 document.getElementById('rectX').setAttribute('value', pue.getBoundingClientRect().x);
                 document.getElementById('offsetX').setAttribute('value', e.offsetX);
