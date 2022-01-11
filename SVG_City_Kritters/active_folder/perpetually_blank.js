@@ -11,6 +11,11 @@ function NewKritter(name = "Finga Prin") {
         this.useElement.setAttribute('y', `${y/scale1}px`);
         return this;
     }
+
+    this.resetViewbox = (allFourValues) => {
+        this.newSymbol.setAttribute('viewBox', allFourValues);
+    }
+
     this.drawNow = () => {
         let mainSvg = document.getElementById('main_svg'); 
         let useBox = document.getElementById('use_box');
@@ -95,10 +100,20 @@ function NewKritter(name = "Finga Prin") {
         display2.setAttribute('type', 'number');
         display2.setAttribute('id', 'offsetX');
 
+        let label3 = document.createElement('label');
+        label3.setAttribute('for', 'bboxX');
+        label3.innerHTML = 'BBoxX: ';
+
+        let display3 = document.createElement('input');
+        display3.setAttribute('type', 'number');
+        display3.setAttribute('id', 'bboxX');
+
         displayDiv.appendChild(label1);
         displayDiv.appendChild(display1);
         displayDiv.appendChild(label2);
         displayDiv.appendChild(display2);
+        displayDiv.appendChild(label3);
+        displayDiv.appendChild(display3);
 
         return displayDiv;
     }

@@ -181,6 +181,8 @@
                 console.log(`cursorOnCharX is ${cursorOnCharX}`);
                 document.getElementById('rectX').setAttribute('value', pue.getBoundingClientRect().x);
                 document.getElementById('offsetX').setAttribute('value', e.offsetX);
+                document.getElementById('bboxX').setAttribute('value', pue.getBBox().x);
+
             }
 
             //set pue's x property to x.offset - cursorOnCharX
