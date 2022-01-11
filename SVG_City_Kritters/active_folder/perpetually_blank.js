@@ -4,6 +4,7 @@ function NewKritter(name = "Finga Prin") {
     this.colorArray = createColorArray(name);
     this.newSymbol = generateNewSymbol(this.colorArray);
     this.useElement = generateUseElement(this);
+    this.rectBuddy = generateRectBuddy(this.useElement);
     this.varyRender = (scale1 = 1, scale2 = 1, x = 0, y = 0) => {
         this.useElement.setAttribute('transform', `scale(${scale1}, ${scale2})`);
         this.useElement.setAttribute('x', `${x/scale1}px`);
@@ -73,6 +74,15 @@ function NewKritter(name = "Finga Prin") {
         console.log(useElem);
         return useElem;
     }
+
+    function generateRectBuddy(element){
+        let display1 = document.createElement('input');
+        display1.setAttribute('type', 'number');
+        display1.setAttribute('id', 'rectX');
+        display1.setAttribute('value', element.getBoundingClientRect().x);
+        return display1;
+    }
+
     function sha256(ascii) {
         function rightRotate(value, amount) {
             return (value >>> amount) | (value << (32 - amount));

@@ -130,33 +130,38 @@
             mostRecentY = 0;
 
         let pue = parkey.useElement;
+        pue.append(parkey.rectBuddy);
         pue.onmousedown = function (e) {
-            pue.style.position = 'absolute';
-            pue.style.zIndex = 1000;
+            console.log('its working kinda so far');
 
-            document.body.append(pue);
+            //get offset of cursor from left edge of box
+            let cursorOnCharX = e.offsetX - pue.getBoundingClientRect().x;
+            console.log(cursorOnCharX);
 
-            function moveAt(pageX, pageY) {
-                pue.style.left = pageX - pue.offsetWidth / 2 + 'px';
-                pue.style.top = pageY - pue.offsetHeight / 2 + 'px';
-            }
 
-            moveAt(e.pageX, e.pageY);
+            // function moveAt(pageX, pageY) {
+            //     pue.style.left = pageX - pue.offsetWidth / 2 + 'px';
+            //     pue.style.top = pageY - pue.offsetHeight / 2 + 'px';
+            // }
+
+            // moveAt(e.pageX, e.pageY);
 
             function onMouseMove(e) {
-                moveAt(e.pageX, e.pageY);
+                pue.style.x = e.offsetX/.5 - cursorOnCharX/0.5;
+                console.log(`cursorOnCharX is ${cursorOnCharX}`);
             }
 
-            document.addEventListener('mousemove', onMouseMove);
+            //set pue's x property to x.offset - cursorOnCharX
+            pue.addEventListener('mousemove', onMouseMove);
 
             pue.onmouseup = function () {
-                document.removeEventListener('mousemove', onMouseMove);
+                pue.removeEventListener('mousemove', onMouseMove);
                 pue.onmouseup = null;
             }
 
-            pue.ondragstart = function () {
-                return false;
-            };
+            // pue.ondragstart = function () {
+            //     return false;
+            // };
         }
 
 
