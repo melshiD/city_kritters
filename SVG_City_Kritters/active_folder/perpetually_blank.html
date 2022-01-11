@@ -7,10 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Refactor Kritter Object</title>
     <style>
-        svg {
-            transform-origin: 400px;
-        }
-
         .container {
             background: url('../../photos/city_6.jpg');
             background-size: contain;
@@ -22,14 +18,14 @@
         }
 
         use{
-            position: absolute;
+            /* position: absolute; */
             border: solid red 4px;
         }
         #cord_displays{
             height: 3em;
             position: absolute;
-            left: 200px;
-            top: 100px;
+            margin-left: 2em;
+            top: 20px;
             border: solid rebeccapurple 5px;
         }
     </style>
@@ -119,66 +115,42 @@
     <script src="perpetually_blank.js"></script>
     <script>
         let fingarin = new NewKritter('fingarin');
-        
         fingarin.drawNow();
-
-        let scaleFactor = .5;
+        let scaleFactor = .25;
+        fingarin.resetViewbox(`0 -500 ${700/scaleFactor} ${933/scaleFactor}`);
 
         let useElement = document.getElementById('fingarin_use_element');
-        //maybe do add/remove classes to filp the thing around?
         let wholeFig = document.getElementById('fingarin_whole_figure');
         useElement.style.transformOrigin = '150px';//seems to need to be set on the use element and not the symbol to be effective
-        useElement.style.transform = `scale(${-scaleFactor}, ${scaleFactor})`;
+        // useElement.style.transform = `scale(${-scaleFactor}, ${scaleFactor})`;
 
         let parkey = new NewKritter('parkey');
         parkey.drawNow();
-        // parkey.useElement.style.transformOrigin = '150px';
-        parkey.createNestingGroupForUseElementAnimation();
-        let parkeyGroup = document.getElementById('parkey_whole_figure_animation');
-        parkey.useElement.style.transform = `scale(${scaleFactor}, ${scaleFactor})`;
-        // parkeyGroup.style.x = '230px';
-
-        // parkey.useElement.style.x = '230px';
+        parkey.resetViewbox(`-300 -200 ${700/scaleFactor} ${933/scaleFactor}`);
 
         let hovering = false,
             dragging = false,
-            mostRecentX = 0,
-            mostRecentY = 0,
             cursorOnCharX = 0,
             cursorOnCharY = 0;
 
         let pue = parkey.useElement;
-
+        //this will append the input elements that actually output values for our rects
         document.getElementById('use_box').insertAdjacentElement('afterend', parkey.rectBuddy);
 
         pue.onmousedown = function (e) {
-
-            //make it so the values for cursorOnCharY and X can't be set if the mouse
-            //isn't over the character use element
-            pue.addEventListener('mouseenter', () =>{
-                hovering = true;
-            });
-            pue.addEventListener('mouseleave', ()=>{
-                hovering = false;
-            });
             //get offset of cursor from left edge of box
             if(hovering === true){
                 cursorOnCharX = (e.offsetX - pue.getBoundingClientRect().x)/scaleFactor;
                 cursorOnCharY = (e.offsetY - pue.getBoundingClientRect().y)/scaleFactor;
             }
-            // let cursorOnCharX = e.offsetX/scaleFactor - pue.getBoundingClientRect().x/scaleFactor;
-            // let cursorOnCharY = e.offsetY/scaleFactor - pue.getBoundingClientRect().y/scaleFactor;
-            console.log(cursorOnCharX);
 
             function onMouseMove(e) {
-                // pue.setAttribute('x', `${Math.floor((e.offsetX - cursorOnCharX)/scaleFactor)}px`);
-                // pue.setAttribute('y', `${Math.floor((e.offsetY - cursorOnCharY)/scaleFactor)}px`);
-                // console.log('EEEEE ' + e.offsetX);
-                // parkeyGroup.style.x = `${Math.floor((e.offsetX - cursorOnCharX)/scaleFactor)}px`;
-                // parkeyGroup.style.y = `${Math.floor((e.offsetY - cursorOnCharY)/scaleFactor)}px`;
-                pue.style.x = (e.offsetX - cursorOnCharX)/scaleFactor;
-                pue.style.y = (e.offsetY - cursorOnCharY)/scaleFactor;
+                parkey.resetViewbox(`${-(e.offsetX - cursorOnCharX)/scaleFactor} 
+                                     ${-(e.offsetY - cursorOnCharY)/scaleFactor} 
+                                     ${700/scaleFactor} 
+                                     ${933/scaleFactor}`);
                 console.log(`cursorOnCharX is ${cursorOnCharX}`);
+                //update data for rect x displays
                 document.getElementById('rectX').setAttribute('value', pue.getBoundingClientRect().x);
                 document.getElementById('offsetX').setAttribute('value', e.offsetX);
                 document.getElementById('bboxX').setAttribute('value', pue.getBBox().x);
