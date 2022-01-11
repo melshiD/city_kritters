@@ -12,8 +12,11 @@ function NewKritter(name = "Finga Prin") {
         return this;
     }
 
+    this.resetViewbox = (allFourValues) => {
+        this.newSymbol.setAttribute('viewBox', allFourValues);
+    }
+
     this.drawNow = () => {
-        if(!document.getElementById('use_box')){ newContainer() }
         let mainSvg = document.getElementById('main_svg'); 
         let useBox = document.getElementById('use_box');
         mainSvg.appendChild(this.newSymbol);
@@ -215,90 +218,6 @@ function NewKritter(name = "Finga Prin") {
     };
 }
 
-function newContainer(){
-    let div = document.createElement('div'),
-        svgNs = "http://www.w3.org/2000/svg",
-        useBox = document.createElementNS(svgNs, 'svg');
-    
-    div.setAttribute('class', 'container');
-    useBox.setAttribute('id', 'use_box');
-    useBox.setAttribute('width', '700px');
-    useBox.setAttribute('height', '933px');
-
-    div.appendChild(useBox);
-
-    document.body.appendChild(div);
-}
-
-
-
-function addInteractivity(frameWidth = 700, frameHeight = 933, scaleFactor = 0.46, kritterObject){
-
-    function resetViewbox(allFourValues, symbol){
-        symbol.setAttribute('viewBox', allFourValues);
-        console.log(allFourValues);
-    }
-    // useElement.style.transformOrigin = `${150*scaleFactor}px`;//seems to need to be set on the use element and not the symbol to be effective
-
-    // let parkey = new NewKritter('parkey');
-    // parkey.drawNow();
-    // parkey.resetViewbox(`-200 -700 ${frameWidth/scaleFactor} ${frameHeight/scaleFactor}`);
-
-    let hovering = false,
-        dragging = false,
-        cursorOnCharX = 0,
-        cursorOnCharY = 0;
-
-    let pue = kritterObject.useElement;
-
-    pue.addEventListener('mouseenter', ()=>{
-        hovering = true;
-        console.log(hovering);
-    });
-    pue.addEventListener('mouseleave', ()=>{
-        hovering = false;
-        console.log(hovering);
-
-    });
-
-    pue.onmousedown = function (e) {
-        //get offset of cursor from left edge of box
-        dragging = true;
-        if(hovering === true){
-            cursorOnCharX = (e.offsetX - pue.getBBox().x)/scaleFactor;
-            cursorOnCharY = (e.offsetY - pue.getBBox().y)/scaleFactor;
-        }
-        function onMouseMove(e) {
-            resetViewbox(`${-(e.offsetX/scaleFactor - cursorOnCharX)} 
-                                 ${-(e.offsetY/scaleFactor - cursorOnCharY)} 
-                                 ${frameWidth/scaleFactor} 
-                                 ${frameHeight/scaleFactor}`, kritterObject.newSymbol);
-        }
-
-        //set pue's x property to x.offset - cursorOnCharX
-        pue.addEventListener('mousemove', onMouseMove);
-
-        pue.onmouseup = function () {
-            pue.removeEventListener('mousemove', onMouseMove);
-            pue.onmouseup = null;
-            dragging = false;
-            console.log("IN ON MOUSE UP");
-        };
-        pue.onmouseleave = function () {
-            pue.removeEventListener('mousemove', onMouseMove);
-            pue.onmouseup = null;
-            dragging = false;
-        };
-        pue.addEventListener('wheel', (e) =>{
-            console.log(e.deltaY);
-            scaleFactor += e.deltaY*0.0001;
-            resetViewbox(`${-(e.offsetX/scaleFactor - cursorOnCharX)} 
-                                 ${-(e.offsetY/scaleFactor - cursorOnCharY)} 
-                                 ${frameWidth/scaleFactor} 
-                                 ${frameHeight/scaleFactor}`, kritterObject.newSymbol);
-        }, {passive: true});
-    }
-}
 
 
 

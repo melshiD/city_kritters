@@ -31,15 +31,14 @@
             top: 20px;
             border: solid rebeccapurple 5px;
         }
-        .overlay{
+        /* .overlay{
             position: absolute;
             top: 0;
             border: solid black 40px;
             width: 700px;
             height: 933px;
             box-sizing: border-box;
-            display: none;
-        }
+        } */
     </style>
 </head>
 
@@ -122,15 +121,15 @@
         </symbol>
     </svg>
     <div class="container">
-        <svg id="use_box" width="700px" height="933px"></svg>
+        <svg id="use_box" width="700px" height="933px" viewBox="0 0 700 933"></svg>
     </div>
     <div class="overlay">
 
     </div>
-    <script src="perpetually_blank.js"></script>
+    <script src="viewBox_before_refactor.js"></script>
     <script>
 
-        let scaleFactor = .46,
+        let scaleFactor = .1,
             frameWidth = 700,
             frameHeight = 933;
         // useElement.style.transformOrigin = `${150*scaleFactor}px`;//seems to need to be set on the use element and not the symbol to be effective
@@ -172,9 +171,9 @@
                                      ${frameHeight/scaleFactor}`);
                 console.log(`cursorOnCharX is ${cursorOnCharX}`);
                 //update data for rect x displays
-                // document.getElementById('rectX').setAttribute('value', pue.getBoundingClientRect().x);
-                // document.getElementById('offsetX').setAttribute('value', e.offsetX);
-                // document.getElementById('bboxX').setAttribute('value', pue.getBBox().x);
+                document.getElementById('rectX').setAttribute('value', pue.getBoundingClientRect().x);
+                document.getElementById('offsetX').setAttribute('value', e.offsetX);
+                document.getElementById('bboxX').setAttribute('value', pue.getBBox().x);
 
             }
 
@@ -190,7 +189,6 @@
             pue.onmouseleave = function () {
                 pue.removeEventListener('mousemove', onMouseMove);
                 pue.onmouseup = null;
-                dragging = false;
             };
             pue.addEventListener('wheel', (e) =>{
                 console.log(e.deltaY);

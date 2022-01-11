@@ -1,48 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Refactor Kritter Object</title>
-    <style>
-        body{
-            overflow: hidden;
-        }
-        .container {
-            background: url('../../photos/city_3.jpg');
-            background-size: contain;
-            background-repeat: no-repeat;
-            width: 700px;
-            height: 933px;
-            /* position: relative;
-            display: inline-block; */
-        }
-
-        use{
-            /* position: absolute; */
-            border: solid red 4px;
-        }
-        #cord_displays{
-            height: 3em;
-            position: absolute;
-            margin-left: 2em;
-            top: 20px;
-            border: solid rebeccapurple 5px;
-        }
-        .overlay{
-            position: absolute;
-            top: 0;
-            border: solid black 40px;
-            width: 700px;
-            height: 933px;
-            box-sizing: border-box;
-            display: none;
-        }
-    </style>
+    <title>Testing new container</title>
 </head>
-
 <body>
     <svg id="main_svg" display="none">
         <symbol stroke='black' id="whole_figure">
@@ -121,90 +84,11 @@
             </g>
         </symbol>
     </svg>
-    <div class="container">
-        <svg id="use_box" width="700px" height="933px"></svg>
-    </div>
-    <div class="overlay">
-
-    </div>
     <script src="perpetually_blank.js"></script>
     <script>
-
-        let scaleFactor = .46,
-            frameWidth = 700,
-            frameHeight = 933;
-        // useElement.style.transformOrigin = `${150*scaleFactor}px`;//seems to need to be set on the use element and not the symbol to be effective
-
-        let parkey = new NewKritter('parkey');
-        parkey.drawNow();
-        parkey.resetViewbox(`-200 -700 ${frameWidth/scaleFactor} ${frameHeight/scaleFactor}`);
-
-        let hovering = false,
-            dragging = false,
-            cursorOnCharX = 0,
-            cursorOnCharY = 0;
-
-        let pue = parkey.useElement;
-        //this will append the input elements that actually output values for our rects
-
-        pue.addEventListener('mouseenter', ()=>{
-            hovering = true;
-            console.log(hovering);
-        });
-        pue.addEventListener('mouseleave', ()=>{
-            hovering = false;
-            console.log(hovering);
-
-        });
-
-        pue.onmousedown = function (e) {
-            //get offset of cursor from left edge of box
-            dragging = true;
-            if(hovering === true){
-                cursorOnCharX = (e.offsetX - pue.getBBox().x)/scaleFactor;
-                cursorOnCharY = (e.offsetY - pue.getBBox().y)/scaleFactor;
-            }
-
-            function onMouseMove(e) {
-                parkey.resetViewbox(`${-(e.offsetX/scaleFactor - cursorOnCharX)} 
-                                     ${-(e.offsetY/scaleFactor - cursorOnCharY)} 
-                                     ${frameWidth/scaleFactor} 
-                                     ${frameHeight/scaleFactor}`);
-                console.log(`cursorOnCharX is ${cursorOnCharX}`);
-                //update data for rect x displays
-                // document.getElementById('rectX').setAttribute('value', pue.getBoundingClientRect().x);
-                // document.getElementById('offsetX').setAttribute('value', e.offsetX);
-                // document.getElementById('bboxX').setAttribute('value', pue.getBBox().x);
-
-            }
-
-            //set pue's x property to x.offset - cursorOnCharX
-            pue.addEventListener('mousemove', onMouseMove);
-
-            pue.onmouseup = function () {
-                pue.removeEventListener('mousemove', onMouseMove);
-                pue.onmouseup = null;
-                dragging = false;
-                console.log("IN ON MOUSE UP");
-            };
-            pue.onmouseleave = function () {
-                pue.removeEventListener('mousemove', onMouseMove);
-                pue.onmouseup = null;
-                dragging = false;
-            };
-            pue.addEventListener('wheel', (e) =>{
-                console.log(e.deltaY);
-                scaleFactor += e.deltaY*0.0001;
-                parkey.resetViewbox(`${-(e.offsetX/scaleFactor - cursorOnCharX)} 
-                                     ${-(e.offsetY/scaleFactor - cursorOnCharY)} 
-                                     ${frameWidth/scaleFactor} 
-                                     ${frameHeight/scaleFactor}`);
-            }, {passive: true});
-        }
-
-
-
+        let david = new NewKritter('david');
+        david.drawNow();
+        addInteractivity(700, 933, 0.5, david);
     </script>
 </body>
-
 </html>
