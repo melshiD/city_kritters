@@ -21,8 +21,9 @@
             display: inline-block; */
         }
 
-        use {
+        use{
             position: absolute;
+            border: solid red 4px;
         }
         #cord_displays{
             height: 3em;
@@ -121,7 +122,7 @@
         
         fingarin.drawNow();
 
-        let scaleFactor = .46;
+        let scaleFactor = .5;
 
         let useElement = document.getElementById('fingarin_use_element');
         //maybe do add/remove classes to filp the thing around?
@@ -131,31 +132,50 @@
 
         let parkey = new NewKritter('parkey');
         parkey.drawNow();
-        parkey.useElement.style.transformOrigin = '150px';
+        // parkey.useElement.style.transformOrigin = '150px';
+        parkey.createNestingGroupForUseElementAnimation();
+        let parkeyGroup = document.getElementById('parkey_whole_figure_animation');
         parkey.useElement.style.transform = `scale(${scaleFactor}, ${scaleFactor})`;
+        // parkeyGroup.style.x = '230px';
 
-        parkey.useElement.style.x = '230px';
+        // parkey.useElement.style.x = '230px';
 
         let hovering = false,
             dragging = false,
             mostRecentX = 0,
-            mostRecentY = 0;
+            mostRecentY = 0,
+            cursorOnCharX = 0,
+            cursorOnCharY = 0;
 
         let pue = parkey.useElement;
 
         document.getElementById('use_box').insertAdjacentElement('afterend', parkey.rectBuddy);
 
         pue.onmousedown = function (e) {
-            console.log('its working kinda so far');
 
+            //make it so the values for cursorOnCharY and X can't be set if the mouse
+            //isn't over the character use element
+            pue.addEventListener('mouseenter', () =>{
+                hovering = true;
+            });
+            pue.addEventListener('mouseleave', ()=>{
+                hovering = false;
+            });
             //get offset of cursor from left edge of box
-            let cursorOnCharX = (e.offsetX - pue.getBoundingClientRect().x)/scaleFactor;
-            let cursorOnCharY = (e.offsetY - pue.getBoundingClientRect().y)/scaleFactor;
+            if(hovering === true){
+                cursorOnCharX = (e.offsetX - pue.getBoundingClientRect().x)/scaleFactor;
+                cursorOnCharY = (e.offsetY - pue.getBoundingClientRect().y)/scaleFactor;
+            }
             // let cursorOnCharX = e.offsetX/scaleFactor - pue.getBoundingClientRect().x/scaleFactor;
             // let cursorOnCharY = e.offsetY/scaleFactor - pue.getBoundingClientRect().y/scaleFactor;
             console.log(cursorOnCharX);
 
             function onMouseMove(e) {
+                // pue.setAttribute('x', `${Math.floor((e.offsetX - cursorOnCharX)/scaleFactor)}px`);
+                // pue.setAttribute('y', `${Math.floor((e.offsetY - cursorOnCharY)/scaleFactor)}px`);
+                // console.log('EEEEE ' + e.offsetX);
+                // parkeyGroup.style.x = `${Math.floor((e.offsetX - cursorOnCharX)/scaleFactor)}px`;
+                // parkeyGroup.style.y = `${Math.floor((e.offsetY - cursorOnCharY)/scaleFactor)}px`;
                 pue.style.x = (e.offsetX - cursorOnCharX)/scaleFactor;
                 pue.style.y = (e.offsetY - cursorOnCharY)/scaleFactor;
                 console.log(`cursorOnCharX is ${cursorOnCharX}`);
