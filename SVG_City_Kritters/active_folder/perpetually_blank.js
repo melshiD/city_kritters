@@ -229,12 +229,13 @@ function newContainer(){
 
 function addInteractivity(frameWidth = 700, frameHeight = 933, scaleFactor = 0.46, kritterObject){
 
-    resetViewbox(`-500 -500 ${frameWidth/scaleFactor} 
+    let zIndex = 1;
+    resetViewBox(`-500 -500 ${frameWidth/scaleFactor} 
                           ${frameHeight/scaleFactor}`, 
                           kritterObject.newSymbol);
                           //why does this need to run first to get the thing to work?
 
-    function resetViewbox(allFourValues, symbol){
+    function resetViewBox(allFourValues, symbol){
         symbol.setAttribute('viewBox', allFourValues);
         console.log(allFourValues);
     }
@@ -257,6 +258,10 @@ function addInteractivity(frameWidth = 700, frameHeight = 933, scaleFactor = 0.4
     });
 
     pue.onmousedown = function (e) {
+        //SETTING ORDER OF CHARACTER RENDER---
+        //for SVG must be done by the order of use elements, or 
+        //manipulating the href attribute to manipulate the order
+
         //get offset of cursor from left edge of box
         dragging = true;
         if(hovering === true){
@@ -264,7 +269,7 @@ function addInteractivity(frameWidth = 700, frameHeight = 933, scaleFactor = 0.4
             cursorOnCharY = (e.offsetY - pue.getBBox().y)/scaleFactor;
         }
         function onMouseMove(e) {
-            resetViewbox(`${-(e.offsetX/scaleFactor - cursorOnCharX)} 
+            resetViewBox(`${-(e.offsetX/scaleFactor - cursorOnCharX)} 
                                  ${-(e.offsetY/scaleFactor - cursorOnCharY)} 
                                  ${frameWidth/scaleFactor} 
                                  ${frameHeight/scaleFactor}`, kritterObject.newSymbol);
@@ -287,7 +292,7 @@ function addInteractivity(frameWidth = 700, frameHeight = 933, scaleFactor = 0.4
         pue.addEventListener('wheel', (e) =>{
             console.log(e.deltaY);
             scaleFactor += e.deltaY*0.0001;
-            resetViewbox(`${-(e.offsetX/scaleFactor - cursorOnCharX)} 
+            resetViewBox(`${-(e.offsetX/scaleFactor - cursorOnCharX)} 
                                  ${-(e.offsetY/scaleFactor - cursorOnCharY)} 
                                  ${frameWidth/scaleFactor} 
                                  ${frameHeight/scaleFactor}`, kritterObject.newSymbol);

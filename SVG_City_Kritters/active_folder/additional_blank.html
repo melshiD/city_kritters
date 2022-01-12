@@ -9,7 +9,12 @@
 <body>
     <style>
         .container{
-            background-image: url('../pictures/bike_near_truck.jpg');
+            background: url('../pictures/bike_near_truck.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 700px;
+            height: 900px;
+
         }
         use{
             position: absolute;
@@ -95,10 +100,26 @@
     </svg>
     <script src="perpetually_blank.js"></script>
     <script>
-        let david = new NewKritter('david');
-        david.drawNow();
+        let tedo = new NewKritter('tedo');
+        tedo.drawNow();
+        addInteractivity(700, 933, 0.5, tedo);
 
-        addInteractivity(700, 933, 0.5, david);
+        let brando = new NewKritter('brando');
+        brando.drawNow();
+        addInteractivity(700, 933, 0.3, brando);
+
+        
+        let peter = new NewKritter('peter');
+        peter.drawNow();
+        addInteractivity(700, 933, 0.3, peter);
+
+        let panko = new NewKritter('panko');
+        panko.drawNow();
+        addInteractivity(700, 933, 0.17, panko);
+
+
+        //the use_box element will need to have it's aspect ratio
+        //track with whatever is going to be able to be set dynamically
         
     </script>
 </body>
