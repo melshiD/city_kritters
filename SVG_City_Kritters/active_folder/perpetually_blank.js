@@ -5,13 +5,6 @@ function NewKritter(name = "Finga Prin") {
     this.newSymbol = generateNewSymbol(this.colorArray);
     this.useElement = generateUseElement(this);
     this.rectBuddy = generateRectBuddy(this.useElement);
-    this.varyRender = (scale1 = 1, scale2 = 1, x = 0, y = 0) => {
-        this.useElement.setAttribute('transform', `scale(${scale1}, ${scale2})`);
-        this.useElement.setAttribute('x', `${x/scale1}px`);
-        this.useElement.setAttribute('y', `${y/scale1}px`);
-        return this;
-    }
-
     this.drawNow = () => {
         if(!document.getElementById('use_box')){ newContainer() }
         let mainSvg = document.getElementById('main_svg'); 
@@ -45,10 +38,10 @@ function NewKritter(name = "Finga Prin") {
 
         newSymbol.id = `${name}_${newSymbol.id}`;
         let newSymGrp = newSymbol.querySelectorAll('g');
-        newSymGrp[1].setAttribute('fill', colorArray[0]);
-        newSymGrp[2].setAttribute('fill', colorArray[1]);
-        newSymGrp[3].setAttribute('fill', colorArray[0]);
-        newSymGrp[4].setAttribute('fill', colorArray[2]);
+        newSymGrp[1].setAttribute('fill', colorArray[4]);
+        newSymGrp[2].setAttribute('fill', colorArray[3]);
+        newSymGrp[3].setAttribute('fill', colorArray[6]);
+        newSymGrp[4].setAttribute('fill', colorArray[3]);
         //newSymGrp[5].setAttribute('fill', colorArray[3]);
         //right and left eye will be handled by a separate function
         return newSymbol;
@@ -64,6 +57,9 @@ function NewKritter(name = "Finga Prin") {
         return colorArray;
     }
 
+    function getViewBox(symbol){
+        return symbol.getAttribute('viewBox');
+    }
     // function generateUseElement(newSym){
     function generateUseElement(newSym){
         let useElementId = `${newSym.name}_use_element`;
@@ -77,9 +73,10 @@ function NewKritter(name = "Finga Prin") {
         return useElem;
     }
 
+    function generateRectBuddy(element){
+        
     //a RectBuddy is what I'm calling my number dashboard I'm using to 
     //figure out how these values are all relating
-    function generateRectBuddy(element){
         let displayDiv = document.createElement('div');
         displayDiv.setAttribute('id', 'cord_displays');
 
@@ -230,19 +227,17 @@ function newContainer(){
     document.body.appendChild(div);
 }
 
-
-
 function addInteractivity(frameWidth = 700, frameHeight = 933, scaleFactor = 0.46, kritterObject){
+
+    resetViewbox(`-500 -500 ${frameWidth/scaleFactor} 
+                          ${frameHeight/scaleFactor}`, 
+                          kritterObject.newSymbol);
+                          //why does this need to run first to get the thing to work?
 
     function resetViewbox(allFourValues, symbol){
         symbol.setAttribute('viewBox', allFourValues);
         console.log(allFourValues);
     }
-    // useElement.style.transformOrigin = `${150*scaleFactor}px`;//seems to need to be set on the use element and not the symbol to be effective
-
-    // let parkey = new NewKritter('parkey');
-    // parkey.drawNow();
-    // parkey.resetViewbox(`-200 -700 ${frameWidth/scaleFactor} ${frameHeight/scaleFactor}`);
 
     let hovering = false,
         dragging = false,
@@ -300,15 +295,8 @@ function addInteractivity(frameWidth = 700, frameHeight = 933, scaleFactor = 0.4
     }
 }
 
-
-
-
-
-
-
-//ways to make a critter
-// const kritter1 = new NewKritter('dave').varyRender(2, 2, 200, 200).drawNow();
-// new NewKritter('vandalay').drawNow().varyRender(4, 4, 444, 333);
-
+function getViewBox(kritterObject){
+    return kritterObject.newSymbol.getAttribute('viewBox');
+}
 
 

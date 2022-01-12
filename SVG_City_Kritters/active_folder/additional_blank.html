@@ -7,6 +7,15 @@
     <title>Testing new container</title>
 </head>
 <body>
+    <style>
+        .container{
+            background-image: url('../pictures/bike_near_truck.jpg');
+        }
+        use{
+            position: absolute;
+        }
+
+    </style>
     <svg id="main_svg" display="none">
         <symbol stroke='black' id="whole_figure">
             <g id="whole_figure_group">
@@ -88,7 +97,9 @@
     <script>
         let david = new NewKritter('david');
         david.drawNow();
+
         addInteractivity(700, 933, 0.5, david);
+        
     </script>
 </body>
 </html>
