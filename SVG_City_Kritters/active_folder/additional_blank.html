@@ -9,6 +9,7 @@
 <body>
     <style>
         .container{
+            overflow: hidden;
             background: url('../pictures/bike_near_truck.jpg');
             background-size: contain;
             background-repeat: no-repeat;
@@ -106,9 +107,8 @@
 
         let brando = new NewKritter('brando');
         brando.drawNow();
-        addInteractivity(700, 933, 0.3, brando);
+        addInteractivity(700, 933, 0.35, brando);
 
-        
         let peter = new NewKritter('peter');
         peter.drawNow();
         addInteractivity(700, 933, 0.3, peter);
@@ -116,6 +116,10 @@
         let panko = new NewKritter('panko');
         panko.drawNow();
         addInteractivity(700, 933, 0.17, panko);
+
+        let micro = new NewKritter('micro');
+        micro.drawNow();
+        addInteractivity(700, 933, 0.7, micro);
 
 
         //the use_box element will need to have it's aspect ratio

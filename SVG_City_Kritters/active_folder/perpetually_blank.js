@@ -237,7 +237,7 @@ function addInteractivity(frameWidth = 700, frameHeight = 933, scaleFactor = 0.4
 
     function resetViewBox(allFourValues, symbol){
         symbol.setAttribute('viewBox', allFourValues);
-        console.log(allFourValues);
+        // console.log(allFourValues);
     }
 
     let hovering = false,
@@ -249,15 +249,16 @@ function addInteractivity(frameWidth = 700, frameHeight = 933, scaleFactor = 0.4
 
     pue.addEventListener('mouseenter', ()=>{
         hovering = true;
-        console.log(hovering);
+        // console.log(hovering);
     });
     pue.addEventListener('mouseleave', ()=>{
         hovering = false;
-        console.log(hovering);
+        // console.log(hovering);
 
     });
 
     pue.onmousedown = function (e) {
+        changeUseOrder(pue)
         //SETTING ORDER OF CHARACTER RENDER---
         //for SVG must be done by the order of use elements, or 
         //manipulating the href attribute to manipulate the order
@@ -290,7 +291,7 @@ function addInteractivity(frameWidth = 700, frameHeight = 933, scaleFactor = 0.4
             dragging = false;
         };
         pue.addEventListener('wheel', (e) =>{
-            console.log(e.deltaY);
+            // console.log(e.deltaY);
             scaleFactor += e.deltaY*0.0001;
             resetViewBox(`${-(e.offsetX/scaleFactor - cursorOnCharX)} 
                                  ${-(e.offsetY/scaleFactor - cursorOnCharY)} 
@@ -304,4 +305,30 @@ function getViewBox(kritterObject){
     return kritterObject.newSymbol.getAttribute('viewBox');
 }
 
+function changeUseOrder(clickedElement){
+    // //how can I use closures to keep track of the top element?
+    // let domUseTree = document.getElementById('use_box');
+    //     numTreeChildren = domUseTree.childElementCount;
+    // if (domUseTree.children[numTreeChildren - 1].id == clickedElement.id){
+    //     console.log('im already on top');
+    //      return true;
+    // };
+    // let fragment = document.createDocumentFragment();
+    // for(let i = 0; i < numTreeChildren - 1; i ++){
+    //     let nextChild = domUseTree.children[i];
+    //     if(nextChild != clickedElement){
+    //         fragment.appendChild(domUseTree.children[i].cloneNode(true));
+    //     }
+    // }
+    // fragment.appendChild(clickedElement.cloneNode(true));
 
+    // removeAllChildren(domUseTree);
+
+    // function removeAllChildren(parent){
+    //     while(parent.firstChild){
+    //         parent.removeChild(parent.firstChild);
+    //     }
+    // }
+
+    // domUseTree.appendChild(fragment);
+}
