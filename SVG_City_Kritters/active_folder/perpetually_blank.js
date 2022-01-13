@@ -335,3 +335,13 @@ function moveBringToFrontButton(connectedElement){
     circleButton.setAttribute('viewBox', `-${rectValues.x -46} -${rectValues.y -30} 700 933`);
     circleButton.setAttribute('to_front', connectedElement.id);
 }
+
+function createAnimationCaptureButton(){
+    let newButton = document.createElement('button');
+    newButton.type = 'button';
+    newButton.innerHTML = 'Capture Position';
+    document.querySelector('.container').appendChild(newButton);
+}
+
+//build solution to track all viewBox values on capture, and then animate between them
+//all simultaneously 
