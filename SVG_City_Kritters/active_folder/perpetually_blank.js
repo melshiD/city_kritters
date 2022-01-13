@@ -228,8 +228,6 @@ function newContainer(){
 }
 
 function addInteractivity(frameWidth = 700, frameHeight = 933, scaleFactor = 0.46, kritterObject){
-
-    let zIndex = 1;
     resetViewBox(`-500 -500 ${frameWidth/scaleFactor} 
                           ${frameHeight/scaleFactor}`, 
                           kritterObject.newSymbol);
@@ -253,16 +251,11 @@ function addInteractivity(frameWidth = 700, frameHeight = 933, scaleFactor = 0.4
     });
     pue.addEventListener('mouseleave', ()=>{
         hovering = false;
-        // console.log(hovering);
-
+        document.getElementById('circle_button').style.opacity = 0;
     });
 
     pue.onmousedown = function (e) {
-        changeUseOrder(pue)
-        //SETTING ORDER OF CHARACTER RENDER---
-        //for SVG must be done by the order of use elements, or 
-        //manipulating the href attribute to manipulate the order
-
+        // changeUseOrder(pue); //bring this element to front
         //get offset of cursor from left edge of box
         dragging = true;
         if(hovering === true){
@@ -274,6 +267,8 @@ function addInteractivity(frameWidth = 700, frameHeight = 933, scaleFactor = 0.4
                                  ${-(e.offsetY/scaleFactor - cursorOnCharY)} 
                                  ${frameWidth/scaleFactor} 
                                  ${frameHeight/scaleFactor}`, kritterObject.newSymbol);
+            moveBringToFrontButton(pue);
+            //how pissed does this script get when I don't add the button first
         }
 
         //set pue's x property to x.offset - cursorOnCharX
@@ -298,6 +293,7 @@ function addInteractivity(frameWidth = 700, frameHeight = 933, scaleFactor = 0.4
                                  ${frameWidth/scaleFactor} 
                                  ${frameHeight/scaleFactor}`, kritterObject.newSymbol);
         }, {passive: true});
+        moveBringToFrontButton(pue);
     }
 }
 
@@ -305,30 +301,37 @@ function getViewBox(kritterObject){
     return kritterObject.newSymbol.getAttribute('viewBox');
 }
 
+
+
 function changeUseOrder(clickedElement){
-    // //how can I use closures to keep track of the top element?
-    // let domUseTree = document.getElementById('use_box');
-    //     numTreeChildren = domUseTree.childElementCount;
-    // if (domUseTree.children[numTreeChildren - 1].id == clickedElement.id){
-    //     console.log('im already on top');
-    //      return true;
-    // };
-    // let fragment = document.createDocumentFragment();
-    // for(let i = 0; i < numTreeChildren - 1; i ++){
-    //     let nextChild = domUseTree.children[i];
-    //     if(nextChild != clickedElement){
-    //         fragment.appendChild(domUseTree.children[i].cloneNode(true));
-    //     }
-    // }
-    // fragment.appendChild(clickedElement.cloneNode(true));
+    let parent = clickedElement.parentElement;
+    parent.removeChild(clickedElement);
+    parent.appendChild(clickedElement);
+}
 
-    // removeAllChildren(domUseTree);
+function makeBringToFrontButton(){
+    let symbol = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    symbol.setAttribute('href', '#circle_button');
+    symbol.setAttribute('to_front', 'uninitiated');
+    symbol.innerHTML = 'FRONT';
+    symbol.addEventListener('mousedown', ()=>{
 
-    // function removeAllChildren(parent){
-    //     while(parent.firstChild){
-    //         parent.removeChild(parent.firstChild);
-    //     }
-    // }
+        let elementToMove = document.getElementById('circle_button');
+        elementToMove = elementToMove.getAttribute('to_front');
+        elementToMove = document.getElementById(elementToMove);
 
-    // domUseTree.appendChild(fragment);
+        changeUseOrder(elementToMove);
+        console.log('in the listener');
+        changeUseOrder(symbol);
+    });
+
+    document.getElementById('use_box').appendChild(symbol);
+}
+
+function moveBringToFrontButton(connectedElement){
+    let circleButton = document.getElementById('circle_button'),
+        rectValues = connectedElement.getBBox();
+    circleButton.style.opacity = 1;
+    circleButton.setAttribute('viewBox', `-${rectValues.x -46} -${rectValues.y -30} 700 933`);
+    circleButton.setAttribute('to_front', connectedElement.id);
 }

@@ -8,17 +8,27 @@
 </head>
 <body>
     <style>
-        .container{
+        .container {
             overflow: hidden;
             background: url('../pictures/bike_near_truck.jpg');
             background-size: contain;
             background-repeat: no-repeat;
             width: 700px;
             height: 900px;
-
+            margin: auto;
+    
         }
-        use{
+    
+        use {
             position: absolute;
+        }
+    
+        #circle_button {
+            transition: opacity 2s;
+        }
+        text{
+            font-size: 0.5em;
+            font-family: monospace;
         }
 
     </style>
@@ -99,8 +109,15 @@
             </g>
         </symbol>
     </svg>
+    <svg id="tool_items">
+        <symbol id="circle_button" fill="white" stroke="rebeccapurple" stroke-width="4">
+            <rect x="20" width="40" height="40" rx="6"></rect>
+            <text x="28" y="17">Front</text>
+        </symbol>
+    </svg>
     <script src="perpetually_blank.js"></script>
     <script>
+
         let tedo = new NewKritter('tedo');
         tedo.drawNow();
         addInteractivity(700, 933, 0.5, tedo);
@@ -121,6 +138,7 @@
         micro.drawNow();
         addInteractivity(700, 933, 0.7, micro);
 
+        makeBringToFrontButton();
 
         //the use_box element will need to have it's aspect ratio
         //track with whatever is going to be able to be set dynamically
