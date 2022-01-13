@@ -263,10 +263,7 @@ function addInteractivity(frameWidth = 700, frameHeight = 933, scaleFactor = 0.4
             cursorOnCharY = (e.offsetY - pue.getBBox().y)/scaleFactor;
         }
         function onMouseMove(e) {
-            resetViewBox(`${-(e.offsetX/scaleFactor - cursorOnCharX)} 
-                                 ${-(e.offsetY/scaleFactor - cursorOnCharY)} 
-                                 ${frameWidth/scaleFactor} 
-                                 ${frameHeight/scaleFactor}`, kritterObject.newSymbol);
+            resetViewBox(`${-(e.offsetX/scaleFactor - cursorOnCharX)} ${-(e.offsetY/scaleFactor - cursorOnCharY)} ${frameWidth/scaleFactor} ${frameHeight/scaleFactor}`, kritterObject.newSymbol);
             moveBringToFrontButton(pue);
             //how pissed does this script get when I don't add the button first
         }
@@ -288,10 +285,7 @@ function addInteractivity(frameWidth = 700, frameHeight = 933, scaleFactor = 0.4
         pue.addEventListener('wheel', (e) =>{
             // console.log(e.deltaY);
             scaleFactor += e.deltaY*0.0001;
-            resetViewBox(`${-(e.offsetX/scaleFactor - cursorOnCharX)} 
-                                 ${-(e.offsetY/scaleFactor - cursorOnCharY)} 
-                                 ${frameWidth/scaleFactor} 
-                                 ${frameHeight/scaleFactor}`, kritterObject.newSymbol);
+            resetViewBox(`${-(e.offsetX/scaleFactor - cursorOnCharX)} ${-(e.offsetY/scaleFactor - cursorOnCharY)} ${frameWidth/scaleFactor} ${frameHeight/scaleFactor}`, kritterObject.newSymbol);
         }, {passive: true});
         moveBringToFrontButton(pue);
     }
@@ -340,8 +334,50 @@ function createAnimationCaptureButton(){
     let newButton = document.createElement('button');
     newButton.type = 'button';
     newButton.innerHTML = 'Capture Position';
+    newButton.id = 'capture_position';
+    newButton.setAttribute('onclick', 'newTimeLine(this)'); //name incidental with html file
+    // newButton.onclick = 'newTimeLine(this)'; //name incidental with html file
     document.querySelector('.container').appendChild(newButton);
 }
 
-//build solution to track all viewBox values on capture, and then animate between them
-//all simultaneously 
+// const AnimationTimeline = () => {
+const AnimationTimeline = () => {
+    let tl = anime.timeline({
+        easing: 'easingOutExpo',
+        autoplay: false
+    });
+    let eventCount = 0;
+    //maybe just keep object of values and send to a generateTimeline function
+    function AddsToTimeline(buttonPressed = false) {
+        //get ahold of viewBox for each character in use_box
+        //commit the values to a new tl event
+        if (buttonPressed) {
+            let useBox = document.getElementById('use_box');
+            for (let i = 0; i < useBox.childElementCount; i++) {
+                let child = useBox.children[i];
+                console.log(child);
+                let childSymbol = document.getElementById(child.getAttribute('href')
+                                                                .slice(1));
+                let viewBoxValues = childSymbol.getAttribute('viewBox');
+                console.log(viewBoxValues);
+                console.log(typeof(viewBoxValues));
+                let newEvent = anime({
+                    targets: `#${childSymbol.id}`,
+                    duration: 3000,
+                    viewBox: `${viewBoxValues}`
+                    // viewBox: '-424.7745361328125 -275.0632629394531 700 933'
+                });
+                tl.add(newEvent);
+                eventCount ++;
+            }
+        }
+        tl.restart();
+        return tl;
+    }
+    return AddsToTimeline;
+}
+
+function playTimeline(timeline){
+    return timeline.play();
+}
+//Design to be easily scaled per requirements of containing element
