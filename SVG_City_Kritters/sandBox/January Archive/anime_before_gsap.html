@@ -132,8 +132,8 @@
     <button type="button" height="3em" onclick="testAnimation.restart">
         CLICK ME
     </button>
-    <script src="../../node_modules/animejs/lib/anime.min.js"></script>
-    <script src="perpetually_blank.js"></script>
+    <script src="../../../node_modules/animejs/lib/anime.min.js"></script>
+    <script src="anime_before_gsap.js"></script>
     <script>
 
         let tedo = new NewKritter('tedo');
@@ -194,7 +194,7 @@
                 document.getElementById('capture_position').style.color = 'black';
             }
         });
-
+    
         function capturePosition() {
             let index = 0; //super janky way to keep the tooltip (located in use_box) from
             //screwing up the animation with it's null value for 
