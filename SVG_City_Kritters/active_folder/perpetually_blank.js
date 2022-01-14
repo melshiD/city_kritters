@@ -1,8 +1,8 @@
 
-function NewKritter(name = "Finga Prin") {
+function NewKritter(name = "FingaPrin") {
     this.name = name;
     this.colorArray = createColorArray(name);
-    this.newSymbol = generateNewSymbol(this.colorArray);
+    this.newSymbol = generateNewSymbol(this);
     this.useElement = generateUseElement(this);
     this.rectBuddy = generateRectBuddy(this.useElement);
     this.drawNow = () => {
@@ -27,7 +27,8 @@ function NewKritter(name = "Finga Prin") {
         return this;
 
     }
-    function generateNewSymbol(colorArray) {
+    function generateNewSymbol(kritter) {
+        colorArray = kritter.colorArray;
         //this early implementation of the function is built
         //around assuming a single character copied many times.
         //New implementation will be required for larger character base
@@ -37,6 +38,7 @@ function NewKritter(name = "Finga Prin") {
         let newSymbol = originalSymbol.cloneNode(true);
 
         newSymbol.id = `${name}_${newSymbol.id}`;
+        newSymbol.setAttribute('name', kritter.name);
         let newSymGrp = newSymbol.querySelectorAll('g');
         newSymGrp[1].setAttribute('fill', colorArray[4]);
         newSymGrp[2].setAttribute('fill', colorArray[3]);
@@ -323,9 +325,19 @@ function makeBringToFrontButton(){
 }
 
 function moveBringToFrontButton(connectedElement){
+    //set color appropriately
     let circleButton = document.getElementById('circle_button'),
         rectValues = connectedElement.getBBox();
+    //find the name then make a string to the kritter object
+    let nameToFindColor = connectedElement.getAttribute('id').split('_')[0];
+
+    ///use eval() TO MAKE STRING INTO A VARIABLE NAME>?
+
+    let color = eval(`${nameToFindColor}.colorArray[3]`);
+    console.log(color);
+    circleButton.setAttribute('fill', color);
     circleButton.style.opacity = 1;
+    // circleButton.style.fill = connectedElement.getAttribute('')
     circleButton.setAttribute('viewBox', `-${rectValues.x -46} -${rectValues.y -30} 700 933`);
     circleButton.setAttribute('to_front', connectedElement.id);
 }
@@ -335,49 +347,10 @@ function createAnimationCaptureButton(){
     newButton.type = 'button';
     newButton.innerHTML = 'Capture Position';
     newButton.id = 'capture_position';
-    newButton.setAttribute('onclick', 'newTimeLine(this)'); //name incidental with html file
-    // newButton.onclick = 'newTimeLine(this)'; //name incidental with html file
+    // newButton.setAttribute('onclick', 'playTimeline'); //name incidental with html file
+    // newButton.onclick = 'playTimeline'; //name incidental with html file
+    newButton.addEventListener('click', capturePosition);
     document.querySelector('.container').appendChild(newButton);
 }
+//moving the timeline functionality out of closure to debug first
 
-// const AnimationTimeline = () => {
-const AnimationTimeline = () => {
-    let tl = anime.timeline({
-        easing: 'easingOutExpo',
-        autoplay: false
-    });
-    let eventCount = 0;
-    //maybe just keep object of values and send to a generateTimeline function
-    function AddsToTimeline(buttonPressed = false) {
-        //get ahold of viewBox for each character in use_box
-        //commit the values to a new tl event
-        if (buttonPressed) {
-            let useBox = document.getElementById('use_box');
-            for (let i = 0; i < useBox.childElementCount; i++) {
-                let child = useBox.children[i];
-                console.log(child);
-                let childSymbol = document.getElementById(child.getAttribute('href')
-                                                                .slice(1));
-                let viewBoxValues = childSymbol.getAttribute('viewBox');
-                console.log(viewBoxValues);
-                console.log(typeof(viewBoxValues));
-                let newEvent = anime({
-                    targets: `#${childSymbol.id}`,
-                    duration: 3000,
-                    viewBox: `${viewBoxValues}`
-                    // viewBox: '-424.7745361328125 -275.0632629394531 700 933'
-                });
-                tl.add(newEvent);
-                eventCount ++;
-            }
-        }
-        tl.restart();
-        return tl;
-    }
-    return AddsToTimeline;
-}
-
-function playTimeline(timeline){
-    return timeline.play();
-}
-//Design to be easily scaled per requirements of containing element

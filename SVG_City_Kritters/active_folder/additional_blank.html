@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Testing new container</title>
 </head>
+
 <body>
     <style>
-        body{
+        body {
             overflow: hidden;
         }
+
         .container {
             overflow: hidden;
             background: url('../pictures/bike_near_truck.jpg');
@@ -19,20 +22,23 @@
             /* width: 700px;
             height: 900px; */
             margin: 1em auto;
-    
         }
 
         use {
             position: absolute;
         }
+
         #circle_button {
-            transition: opacity 2s;
+            transition: opacity 2s, fill 0.5s;
+
         }
-        text{
+
+        text {
             font-size: 0.5em;
             font-family: monospace;
         }
-        button{
+
+        button {
             height: 2em;
             position: relative;
             left: 100px;
@@ -126,7 +132,7 @@
     <button type="button" height="3em" onclick="testAnimation.restart">
         CLICK ME
     </button>
-    <script src="../../node_modules/animejs/lib/anime.min.js" ></script>
+    <script src="../../node_modules/animejs/lib/anime.min.js"></script>
     <script src="perpetually_blank.js"></script>
     <script>
 
@@ -134,37 +140,85 @@
         tedo.drawNow();
         addInteractivity(700, 933, 0.5, tedo);
 
-        let brando = new NewKritter('brando');
-        brando.drawNow();
-        addInteractivity(700, 933, 0.35, brando);
+        // let brando = new NewKritter('brando');
+        // brando.drawNow();
+        // addInteractivity(700, 933, 0.35, brando);
 
-        let peter = new NewKritter('peter');
-        peter.drawNow();
-        addInteractivity(700, 933, 0.3, peter);
+        // let peter = new NewKritter('peter');
+        // peter.drawNow();
+        // addInteractivity(700, 933, 0.3, peter);
 
-        let panko = new NewKritter('panko');
-        panko.drawNow();
-        addInteractivity(700, 933, 0.17, panko);
+        // let panko = new NewKritter('panko');
+        // panko.drawNow();
+        // addInteractivity(700, 933, 0.17, panko);
 
         let micro = new NewKritter('micro');
         micro.drawNow();
         addInteractivity(700, 933, 0.7, micro);
 
-        // makeBringToFrontButton();
+        makeBringToFrontButton();
 
         createAnimationCaptureButton();
         //the use_box element will need to have it's aspect ratio
         //track with whatever is going to be able to be set dynamically
-        const newTimeLine = AnimationTimeline();
 
-        let testAnimation = anime({
-            targets: '#micro_whole_figure',
-            viewBox: '-424.7745361328125 -275.0632629394531 700 933',
-            duration: 6000,
-            autoplay: false
+        // let timeline = anime.timeline({
+        //     loop: false,
+        //     easing: 'easeInOutSine',
+        //     autoplay: false
+        // });
+        // let useBox = document.getElementById('use_box');
+        // for (let child of useBox.children) {
+        //     let childSymbol = document.getElementById(child.getAttribute('href').slice(1));
+        //     console.log(childSymbol.id);
+        //     let viewBoxValues = childSymbol.getAttribute('viewBox');
+        //     console.log(viewBoxValues);
+        //     console.log(typeof (viewBoxValues));
+        //     console.log(`#${childSymbol.id}`);
+
+        //     timeline.add({
+        //         targets: `#${childSymbol.id}`,
+        //         viewBox: `${viewBoxValues}`,
+        //         duration: 4000
+        //         // viewBox: '-424.7745361328125 -275.0632629394531 700 933'
+        //     });
+        // }
+        let timeline = anime.timeline({
+            loop: false,
+            easing: 'easeInOutSine',
+            autoplay: false,
+            begin: function () {
+                document.getElementById('capture_position').style.color = 'red';
+            },
+            complete: function () {
+                document.getElementById('capture_position').style.color = 'black';
+            }
         });
-        // the .play() and .pause() aren't working on my timeline, but only on 
-        //single anime decs
+
+        function capturePosition() {
+            let index = 0; //super janky way to keep the tooltip (located in use_box) from
+            //screwing up the animation with it's null value for 
+            let useBox = document.getElementById('use_box');
+            for (child of useBox.children) {
+                if (index < useBox.childElementCount - 1) {
+                    let linkedSymbolId = child.getAttribute('href').slice(1),
+                        linkedSymbol = document.getElementById(linkedSymbolId);
+                    let viewBoxValues = linkedSymbol.getAttribute('viewBox');
+                    console.log(viewBoxValues);
+                    console.log(typeof (viewBoxValues));
+                    timeline.add({
+                        targets: `#${linkedSymbol.id}`,
+                        viewBox: `${viewBoxValues}`,
+                        duration: 400,
+                        autoplay: false
+                    });
+                    console.log('ADDED SUCCESSFULLY');
+                    index++;
+                }
+                // timeline.restart();
+            }
+        }
     </script>
 </body>
+
 </html>
